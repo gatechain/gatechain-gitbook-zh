@@ -1,85 +1,84 @@
-# GateChain CLI Reference
+# GateChain CLI 参考
 
-> Important Note:
-> - All CLI commands require setting a transaction fee greater than 0NANOGT
-> - Asset amounts are positive integer values converted by multiplying by 10E18
-> - Asset amounts support scientific notation, e.g., 10E9 NANOGT = 1GT
+> 重要提示：
+> - 所有 CLI 命令都需要设置大于 0NANOGT 的交易费用
+> - 资产金额是通过乘以 10E18 转换的正整数值
+> - 资产金额支持科学计数法，例如：10E9 NANOGT = 1GT
 
-## Basic Commands
+## 基本命令
 
-### 1. Start Local RPC Service
+### 1. 启动本地 RPC 服务
 
-**Command**
+**命令**
 ```bash
 gatecli rest-server
 ```
 
-**Notes**
-- When RPC service starts, command line cannot be executed due to storage lock
+**说明**
+- 当 RPC 服务启动时，由于存储锁定，命令行无法执行
 
-### 2. Query Node Status
+### 2. 查询节点状态
 
-**Command**
+**命令**
 ```bash
 gatecli status
 ```
 
-**Notes**
-- Query local node service status
+**说明**
+- 查询本地节点服务状态
 
-### 3. Query Version
+### 3. 查询版本
 
-**Command**
+**命令**
 ```bash
 gatecli version
 ```
 
-**Notes**
-- Query version information of the command line
+**说明**
+- 查询命令行的版本信息
 
-### 4. Get Help
+### 4. 获取帮助
 
-**Command**
+**命令**
 ```bash
 gatecli [Help1] [Help2] [Help3]... --help
 ```
 
-**Notes**
-- For more information about command line operations, use the help command
+**说明**
+- 使用帮助命令获取有关命令行操作的更多信息
 
-#### Errors
+#### 错误
 ```bash
 Must specify these options: --chain-id  when --trust-node is false
 ```
 
-If trust this node, please enter '--trust-node=true'，Otherwise enter'--chain-id'to solve the above error.
+如果信任此节点，请输入 '--trust-node=true'，否则输入 '--chain-id' 来解决上述错误。
 
 
+## 账户管理
 
-## Account Management
+### 1. 账户类型
+- 单签名账户
+  - 前缀：'gt1'
+  - 示例：'gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq'
+- 多重签名账户
+  - 前缀：'gt2'
+  - 示例：'g211twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq'
+- 单签名保险箱账户
+  - 前缀：'vault1'
+  - 示例：'vault11fg056uaatk9s3k6l34eqkc7qchjup8e39afauf9naz4jmpklsze3uwx6405vll88l5lvww'
+- 多重签名保险箱账户
+  - 前缀：'vault2'
+  - 示例：'vault21fg056uaatk9s3k6l34eqkc7qchjup8e39afauf9naz4jmpklsze3uwx6405vll88l5lvww'
 
-### 1. Account Types
-- Single Signature Account
-  - Prefix: 'gt1'
-  - Example: 'gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq'
-- Multisignature Account
-  - Prefix: 'gt2'
-  - Example: 'g211twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq'
-- Single Signature Vault Account
-  - Prefix: 'vault1'
-  - Example: 'vault11fg056uaatk9s3k6l34eqkc7qchjup8e39afauf9naz4jmpklsze3uwx6405vll88l5lvww'
-- Multisignature Vault Account
-  - Prefix: 'vault2'
-  - Example: 'vault21fg056uaatk9s3k6l34eqkc7qchjup8e39afauf9naz4jmpklsze3uwx6405vll88l5lvww'
+### 2. 创建单签名账户
 
-### 2. Create Single Signature Account
-
-**Command**
+**命令**
 ```bash
 gatecli account create
 ```
 
-**Response Example**
+**响应示例**
 ```
 - name: vault
   type: local
@@ -89,48 +88,48 @@ gatecli account create
   threshold: 0
   pubkeys: []
 
-Important: Write this mnemonic phrase in a safe place.
-It is the only way to recover your account if you ever forget your password.
+重要提示：请将此助记词短语保存在安全的地方。
+如果您忘记了密码，这是恢复账户的唯一方式。
 
 flee agree charge truth answer flush inflict shove nice valid auto love laugh review frame sword later man inside couch slogan level guitar diet
 ```
 
-**Notes**
-- The mnemonic phrase is only displayed when creating the account and will not show when using show or list commands
-- Save the mnemonic phrase in a secure location as it's required for account recovery
+**注意**
+- 助记词短语仅在创建账户时显示，使用 show 或 list 命令时不会显示
+- 请将助记词短语保存在安全的位置，因为它是恢复账户所必需的
 
-### 3. Create Multisignature Account
+### 3. 创建多重签名账户
 
-**Command**
+**命令**
 ```bash
 gatecli account create [account] --multisig [account list] --multisig-threshold [minimum effective amount]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| account | String | Name of the account to create |
-| account list | String | Comma-separated list of existing account addresses |
-| minimum effective amount | Integer | Minimum number of signatures required |
+| account | String | 要创建的账户名称 |
+| account list | String | 以逗号分隔的现有账户地址列表 |
+| minimum effective amount | Int| 所需的最小签名数量 |
 
-**Example**
+**示例**
 ```bash
 gatecli account create gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --multisig gt110nxr6.....,gt113454xdr..... --multisig-threshold 2
 ```
 
-**Notes**
-- Account list must refer to already created accounts
-- After creation, use `gatecli account publish-multisig` to get the final multisig address starting with 'gt2'
+**注意**
+- 账户列表必须引用已创建的账户
+- 创建后，使用 `gatecli account publish-multisig` 获取以 'gt2' 开头的最终多重签名地址
 
-### 4. Query Account List
+### 4. 查询账户列表
 
-**Command**
+**命令**
 ```bash
 gatecli account list
 ```
 
-**Response Example**
+**响应示例**
 ```
 - name: con
   type: local
@@ -141,26 +140,26 @@ gatecli account list
   pubkeys: []
 ```
 
-### 5. Query Account Information
+### 5. 查询账户信息
 
-**Command**
+**命令**
 ```bash
 gatecli account show [account] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| account | String | Account address to query |
-| chain-id | String | Chain ID of the network |
+| account | String | 要查询的账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli account show gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Account:
   Address:        gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7
@@ -173,145 +172,132 @@ Account:
   ReceivedRevocableTokens:
 ```
 
-**Notes**
-- AccountType: 0=Single signature standard account, 1=Single signature Vault Account, 2=Multisignature standard account, 3=Multisignature Vault Account
-- VaultAddress: If present, indicates this account is a Retrieval Account for the listed Vault Account
+**注意**
+- AccountType: 0=单签名标准账户, 1=单签名保险箱账户, 2=多重签名标准账户, 3=多重签名保险箱账户
+- VaultAddress: 如果存在，表示此账户是列出的保险箱账户的找回账户
 
-### 6. Change Account Password
+### 6. 修改账户密码
 
-**Command**
+**命令**
 ```bash
 gatecli account update [name]
 ```
 
-**Example**
+**示例**
 ```bash
 gatecli account update 1583472684
 ```
 
-**Response Example**
+**响应示例**
 ```
-Password successfully updated!
+密码更新成功！
 ```
 
-### 7. Delete Account
+### 7. 删除账户
 
-**Command**
+**命令**
 ```bash
 gatecli account delete [name]
 ```
 
-**Example**
+**示例**
 ```bash
 gatecli account delete 1583472684
 ```
 
-**Response Example**
+**响应示例**
 ```
-Key deleted forever (uh oh!)
+账户已永久删除！
 ```
 
-**Notes**
-- Account private key will be deleted permanently
+**注意**
+- 账户私钥将被永久删除
 
-### 8. Query Account Balance
+### 8. 查询账户余额
 
-**Command**
+**命令**
 ```bash
 gatecli account balance [account] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| account | String | Account address to query |
-| chain-id | String | Chain ID of the network |
+| account | String | 要查询的账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli account balance gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
-1000000NANOGT //account balance
+1000000NANOGT //账户余额
 ```
 
-### 9. Query Account Public Key
+### 9. 查询账户公钥
 
-**Command**
+**命令**
 ```bash
 gatecli account show-key [name]
 ```
 
-**Example**
+**示例**
 ```bash
 gatecli account show-key 1583472684
 ```
 
-**Response Example**
-```
-- name: delegate
-  type: local
-  address: gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s
-  pubkey: gt1pub1u8s6p73qva7mzaymcwfxf6ssmvamtjzzd3adp4eavlky0gwhlwwlwpukqq6sqwuxfg
-  mnemonic: ""
-  threshold: 0
-  pubkeys: []
-```
+### 10. 发布多重签名账户
 
-### 10. Publish Multisignature Account
-
-**Command**
+**命令**
 ```bash
 gatecli account publish-multisig [account] [public key] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| account | String | Account address to publish |
-| public key | String | Public key of the multisig account |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| account | String | 要发布的多重签名账户地址 |
+| public key | String | 多重签名账户的公钥 |
+| sender account | String | 发送交易的账户地址 |
+| tx fees | String | 交易费用 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli account publish-multisig gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq gt1pub1ytql0csgqgfzd666axrjzqegteuuxvghau9u0q67lltpjqla3ykzz3t8efmh6sqhyt4uhnh3q5fzd666axrjzqkhwmygytf0grzudhv69h9ttcy4xhze0v4mtf4jza6mrp0j3lq68qfzd666axrjzqn6wmq0uuyvxr8tywehal0zyzhpy5tv4h5tpryvc449jmznnzdruqy68ks2 --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
-Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
-Raw Log: sync broadcast tx success
 ```
 
-## Block Information
+## 区块信息
 
-### 1. Query Block Information
+### 1. 查询区块信息
 
-**Command**
+**命令**
 ```bash
 gatecli block show [block height] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| block height | Integer | Height of the block to query |
-| chain-id | String | Chain ID of the network |
+| block height | Int | 要查询的区块高度 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli block show 10001 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```json
 {
     "hash": "H44ZPPWLRIXI3TJ64UZSHKKSJ4XRJMWIGU6FHFQXWFTRY3QHW3426MWP3IA44KJHZHBEHSOYYEWNO",
@@ -348,45 +334,45 @@ gatecli block show 10001 --chain-id testnet
 }
 ```
 
-**Field Descriptions**
-- hash: Hash of the current block
-- previousBlockHash: Hash of the preceding block
-- seed: VRF seed for draw
-- proposer: Consensus account that proposed the block
-- height: Block height
-- period: Block phase
-- txnRoot: Hash of the collection of transactions in the block
-- timestamp: Time block was generated
-- UpgradeState: Version status of consensus protocol
-- UpgradeVote: Voting status for consensus protocol upgrading
-- CertCommitteeInfo: Block committee (potential reward winners of next round)
-- BlockCommitteeInfo: Blockchain committee (reward winners of this round)
-- autoOfflineAccounts: Consensus accounts auto-offline at specified rounds
+**字段描述**
+- hash: 当前区块的哈希值
+- previousBlockHash: 前一个区块的哈希值
+- seed: VRF种子用于抽取
+- proposer: 提议区块的共识账户
+- height: 区块高度
+- period: 区块阶段
+- txnRoot: 区块中交易的哈希值
+- timestamp: 区块生成的时间
+- UpgradeState: 共识协议版本状态
+- UpgradeVote: 共识协议升级投票状态
+- CertCommitteeInfo: 区块委员会（下一轮潜在奖励得主）
+- BlockCommitteeInfo: 区块链委员会（本轮奖励得主）
+- autoOfflineAccounts: 指定轮次自动离线的共识账户
 
-## Consensus Account 
+## 共识账户
 
-### 1. Create a Consensus Account
+### 1. 创建共识账户
 
-**Command**
+**命令**
 ```bash
 gatecli con-account create [account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
 | Parameter | Type | Description |
 |------|------|------|
 | account address | String | Address of the consensus account to create |
 | chain-id | String | Chain ID of the network |
 
-**Example**
+**示例**
 ```bash
 gatecli con-account create gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
-ParticipationKeyResponse Data:
+ParticipationKey响应Data:
  ConAccount:
   Code:	0
   Log:	success //logs
@@ -396,13 +382,13 @@ ParticipationKeyResponse Data:
   SelectionID: 		293rc5xc7fsz81txx35686x0n4arbvx4cvy7n01e1emtghybhhg0 //the one-time signing public key
   FileName:	AAAAAAAAAAAABXJ3QGZLVBIMEGOHDOOTCELOEO437DZQTRW5VBB3QVMSZ23VKLZVGSFOMUGDNLZQZVIEBFXQ.0.0.partkey //local partkeyFile Name
 ```
-**Description**
-- When creating a consensus account, please ensure the account has adequate 'NANOGT' tokens.
+**描述**
+- 创建共识账户时，请确保账户有足够的 'NANOGT' 代币。
 
 
-### 2. Get Consensus Account Online
+### 2. 获取共识账户在线
 
-**Command**
+**命令**
 ```bash
 gatecli con-account online 
 --from [sender account] 
@@ -415,25 +401,25 @@ gatecli con-account online
 --chain-id [chain ID] 
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| sender account | String | Account address of the sender |
-| sender account public key | String | Public key of the sender account |
-| name | String | Name of the consensus account |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| max commission rate change daily | String | Maximum commission rate change daily |
-| max commission rate | String | Maximum commission rate |
-| commission rate | String | Commission rate |
-| chain-id | String | Chain ID of the network |
+| sender account | String | 发送者账户地址 |
+| sender account public key | String | 发送者账户公钥 |
+| name | String | 共识账户名称 |
+| tx fees | String | 交易手续费 (e.g., 100000NANOGT) |
+| max commission rate change daily | String | 最大佣金率变化每日 |
+| max commission rate | String | 最大佣金率 |
+| commission rate | String | 佣金率 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli con-account online --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --pubkey gt1pub1u8s6p73qp3ac00a628mk7g4utllp6cvrl54vqgdazg3q6d8e3lzxxycrgw3qk3q7wn --moniker newcon-account --fees 100000NANOGT --commission-max-change-rate "0.01" --commission-max-rate "0.01" --commission-rate "0.01" --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
  TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
   //transaction  has,using gatecli tx show {hash} to query detailed information of this transaction 
@@ -443,25 +429,25 @@ gatecli con-account online --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv
 
 ### 3. Get Consensus Account Offline
 
-**Command**
+**命令**
 ```bash
 gatecli con-account offline --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli con-account offline --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
   TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
   //transaction hash,using gatecli tx show {hash} to query detailed transaction information
@@ -469,29 +455,29 @@ gatecli con-account offline --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72q
   Raw Log: sync broadcast tx success //transaction  is successfully sent
 ```
 
-### 4. Modify the max commission rate of consensus account
+### 4. 修改共识账户的最大佣金率
 
-**Command**
+**命令**
 ```bash
 gatecli con-account max-rate -- commission-max-rate [max commission rate] --commission-max-change-rate [max commission rate change daily] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| max commission rate | String | Maximum commission rate |
-| max commission rate change daily | String | Maximum commission rate change daily |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| max commission rate | String | 最大佣金率 |
+| max commission rate change daily | String | 每日最大佣金率变化 |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli con-account max-rate -- commission-max-rate 0.1 --commission-max-change-rate 0.2 --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 10000000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
  TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
   //transaction hash,using gatecli tx show {hash} to query
@@ -499,29 +485,29 @@ gatecli con-account max-rate -- commission-max-rate 0.1 --commission-max-change-
   Raw Log: sync broadcast tx success //transaction  is successfully sent
 ```
 
-### 5. Edit Consensus Account
+### 5. 编辑共识账户
 
-**Command**
+**命令**
 ```bash
 gatecli con-account edit --moniker [con-account name] --commission-rate [commission rate] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| con-account name | String | Name of the consensus account |
-| commission rate | String | Commission rate |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| con-account name | String | 共识账户的名称 |
+| commission rate | String | 佣金率 |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli con-account edit --moniker con1 --commission-rate 0.03 --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
   TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
   //transaction hash,using gatecli tx show {hash} to query
@@ -529,34 +515,34 @@ gatecli con-account edit --moniker con1 --commission-rate 0.03 --from gt11twm7dm
   Raw Log: sync broadcast tx success //transaction  is successfully sent
 ```
 
-**Description**
-- commission-rate The following requirements must be met:
-- - Must be between 0 and commission-max-rate set by the con-account;
-- - It can only be changed once a day,And the range of change shall not exceed the commission-max-change-rate set by the con-account.
+**描述**
+- 佣金率必须满足以下要求：
+- - 必须在共识账户设置的最大佣金率（commission-max-rate）范围内；
+- - 每天只能更改一次，且更改范围不得超过共识账户设置的最大佣金率变化（commission-max-change-rate）。
 
 
-### 6. Query Consensus Account Information
+### 6. 查询共识账户信息
 
-**Command**
+**命令**
 ```bash
 gatecli con-account show-key [consensus account pending online] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account pending online | String | Address of the consensus account to query |
-| chain-id | String | Chain ID of the network |
+| consensus account pending online | String | 要查询的共识账户地址 |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli con-account show-key gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
-ParticipationKeyResponse Data:
+ParticipationKey响应Data:
  ConAccount:
   Code: 0
   Log: success
@@ -567,28 +553,28 @@ ParticipationKeyResponse Data:
   FileName: AAAAAAAAAAAABXJ3QGZLVBIMEGOHDOOTCELOEO437DZQTRW5VBB3QVMSZ23VKLZVGSFOMUGDNLZQZVIEBFXQ.0.0.partkey
 ```
 
-### 7. Query Local Consensus Account Information
+### 7. 查询本地共识账户信息
 
-**Command**
+**命令**
 ```bash
 gatecli con-account show-key [consensus account pending online] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account pending online | String | Address of the consensus account to query |
-| chain-id | String | Chain ID of the network |
+| consensus account pending online | String | 要查询的共识账户地址 |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli con-account show-key gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
-ParticipationKeyResponse Data:
+ParticipationKey响应Data:
  ConAccount:
   Code:	0
   Log:	success //logs
@@ -596,28 +582,28 @@ ParticipationKeyResponse Data:
   Address: 		AAAAAAAAAAAABXJ3QGZLVBIMEGOHDOOTCELOEO437DZQTRW5VBB3QVMSZ23VKLZVGSFOMUGDNLZQZVIEBFXQ //gatemint consensus account address
   VoteID: 		hgnhy7jmd8jy19j2hhcageqdj1s4xt7kpnv4388zxt8jaqbyrew0 //VRF public key
   SelectionID: 		293rc5xc7fsz81txx35686x0n4arbvx4cvy7n01e1emtghybhhg0 //the one-time signing public key
-  FileName:	AAAAAAAAAAAABXJ3QGZLVBIMEGOHDOOTCELOEO437DZQTRW5VBB3QVMSZ23VKLZVGSFOMUGDNLZQZVIEBFXQ.0.0.partkey // local partkeyFile Name
+  FileName:	AAAAAAAAAAAABXJ3QGZLVBIMEGOHDOOTCELOEO437DZQTRW5VBB3QVMSZ23VKLZVGSFOMUGDNLZQZVIEBFXQ.0.0.partkey //local partkeyFile Name
 ```
 
-### 8. Query Consensus Account List
+### 8. 查询共识账户列表
 
-**Command**
+**命令**
 ```bash
 gatecli con-account list --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| chain-id | String | Chain ID of the network |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli con-account list --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Con-account
   Address:                    gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7
@@ -631,60 +617,60 @@ Con-account
   Commission:                 rate: 0.000000000000000000, maxRate: 0.000000000000000000, maxChangeRate: 0.000000000000000000, updateTime: 1970-01-01 00:00:00 +0000 UTC
 ```
 
-## Distribution Management
+## 分配管理
 
-### 1. Setup Account to Fetch Income
+### 1. 设置账户以获取收入
 
-**Command**
+**命令**
 ```bash
 gatecli distribution set-withdraw-addr [account to fetch income] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| account to fetch income | String | Account address to receive income |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| account to fetch income | String | 收入的账户地址 |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli distribution set-withdraw-addr gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
 
-**Note**: The vault account can only withdraw the income and principal to this account and cannot be set up separately.
+**注意**：保险箱账户只能将收入和本金转移到这个账户，不能单独设置。
 
-### 2. Delegator Account Fetch Partial Income From A Consensus Account
+### 2. 委托人账户从共识账户中提取部分收入
 
-**Command**
+**命令**
 ```bash
 gatecli distribution withdraw-rewards [consensus account address] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account address | String | Address of the consensus account |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| consensus account address | String | 共识账户的地址 |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli distribution withdraw-rewards gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
   TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
   //transaction hash, using gatecli tx show {hash}to query details of this transaction
@@ -692,27 +678,27 @@ gatecli distribution withdraw-rewards gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h
   Raw Log: sync broadcast tx success transaction is sent successfully
 ```
 
-### 3. Delegator Account Fetch All Income From A Consensus Account
+### 3. 委托人账户从共识账户中提取所有收入
 
-**Command**
+**命令**
 ```bash
 gatecli distribution withdraw-all-rewards --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli distribution withdraw-all-rewards --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
   TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
   //transaction hash, using gatecli tx show {hash}to query details of this transaction
@@ -721,53 +707,53 @@ gatecli distribution withdraw-all-rewards --from gt11twm7dma44k7wg5jppeyphrct9nx
 ```
 ### 4. Reinvestment the rewards of the delegator account into the consensus account
 
-**Command**
+**命令**
 ```bash
 gatecli distribution reward-reinvestment [consensus account address] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account address | String | Address of the consensus account |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| consensus account address | String | 共识账户的地址 |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli distribution reward-reinvestment gt11rjq598t8vte64ff2tnesdvsfazv38atpenufj4zl0ljhw2q28jnlxnh6mqgmn6elje6fzc --from gt11mtehamaw8wktwpppx9klrhhfu5upmutzthl0kkpwsa0slw8h4xd3p2ane2zt262dlsyy3m --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
   TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
   //transaction hash, using gatecli tx show {hash}to query details of this transaction
   Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
   Raw Log: sync broadcast tx success transaction is sent successfully
 ```
-### 5. Query Delegation Income of A Delegator Account At A Consensus Account
+### 5. 查询某个委托人账户在某个共识账户上的委托收入
 
-**Command**
+**命令**
 ```bash
 gatecli distribution rewards [delegator account address] [consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| delegator account address | String | Address of the delegator account |
-| consensus account address | String | Address of the consensus account |
-| chain-id | String | Chain ID of the network |
+| delegator account address | String | 委托人账户的地址 |
+| consensus account address | String | 共识账户的地址 |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli distribution rewards gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Delegator Total Rewards:
   Rewards:
@@ -776,24 +762,24 @@ Delegator Total Rewards:
 ```
 ### 6. Query Delegation Income of A Delegator Account At All Consensus Account
 
-**Command**
+**命令**
 ```bash
 gatecli distribution rewards [delegator account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| delegator account address | String | Address of the delegator account |
-| chain-id | String | Chain ID of the network |
+| delegator account address | String | 委托人账户的地址 |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli distribution rewards gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Delegator Total Rewards:
   Rewards:
@@ -802,68 +788,68 @@ Delegator Total Rewards:
 	Con-account:...
 Total: 11997269037.266215577925788000NANOGT //total delegation income of a delegator account
 ```
-### 7. Query Delegation Income Pending Paying By A Consensus Account
+### 7. 查询共识账户待支付的委托收入
 
-**Command**
+**命令**
 ```bash
 gatecli distribution outstanding-rewards [consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account address | String | Address of the consensus account |
-| chain-id | String | Chain ID of the network |
+| consensus account address | String | 共识账户的地址 |
+| chain ID | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli distribution outstanding-rewards gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
-660467079334.408199257068561630NANOGT //delegation income yet to be paid
+660467079334.408199257068561630NANOGT //待支付的委托收入
 ```
 
-### 8. Query Consensus Account Income
+### 8. 查询共识账户收入
 
-**Command**
+**命令**
 ```bash
 gatecli distribution commission [consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
 | Parameter | Type | Description |
 |------|------|------|
 | consensus account address | String | Address of the consensus account |
 | chain-id | String | Chain ID of the network |
 
-**Example**
+**示例**
 ```bash
 gatecli distribution commission gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 660467079334.408199257068561630NANOGT //commission and mining earnings
 ```
 
-### 9. Query Distribution And Foundation Parameters
+### 9. Query Distribution And Foundation 参数
 
-**Command**
+**命令**
 ```bash
 gatecli distribution params --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
 | Parameter | Type | Description |
 |------|------|------|
 | chain-id | String | Chain ID of the network |
 
-**Response Example**
+**响应示例**
 ```
 Distribution Params:
   Community Tax:          "0.020000000000000000" //Community Tax rate
@@ -878,12 +864,12 @@ Distribution Params:
 
 ### 1. Send Revocable Transaction
 
-**Command**
+**命令**
 ```bash
 gatecli revocable-tx send [recipient account] [transfer token amount] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
 | Parameter | Type | Description |
 |------|------|------|
@@ -893,41 +879,41 @@ gatecli revocable-tx send [recipient account] [transfer token amount] --from [se
 | tx fees | String | Transaction fees (e.g., 100000NANOGT) |
 | chain-id | String | Chain ID of the network |
 
-**Example**
+**示例**
 ```bash
 gatecli revocable-tx send gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 10NANOGT --from vault11fg056uaatk9s3k6l34eqkc7qchjup8e39afauf9naz4jmpklsze3uwx6405vll88l5lvww --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: REVOCABLEPAY-0FD8A17798EC2CC637252687CA7DACA39BE0C555496EC3242F90C7C0BBBFE5F10A34A51D866BEC91A9866275BED9B522
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
 
-**Notes**
-- Only Vault Account can send a Revocable Transaction
+**说明**
+- 只有金库账户可以发送可撤销交易
 
 ### 2. Query Single Transaction
 
-**Command**
+**命令**
 ```bash
 gatecli revocable-tx show [transaction Hash] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| transaction Hash | String | Hash of the transaction to query |
-| chain-id | String | Chain ID of the network |
+| transaction Hash | String | 要查询的交易哈希值 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli revocable-tx show 03190D3F56D6B65CC11BFE3F9CD961729B134D224A35AC731728601C9DD3A3C7 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Response:
   Height: 773
@@ -949,24 +935,24 @@ Response:
 
 ### 3. Query Revocable Transaction List
 
-**Command**
+**命令**
 ```bash
 gatecli revocable-tx list [Vault Account] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| Vault Account | String | Address of the Vault Account |
-| chain-id | String | Chain ID of the network |
+| Vault Account | String | 要查询的 Vault 账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli revocable-tx list vault11fg056uaatk9s3k6l34eqkc7qchjup8e39afauf9naz4jmpklsze3uwx6405vll88l5lvww --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Txs: count  1
 TxHash:         REVOCABLEPAY-082A18896CD1397563569D939C884D446B303865012C750ACB40E3911CF8FD69144F836537C97B77EFF473776D7889F5
@@ -975,59 +961,59 @@ Height:         873
 Tokens:          100NANOGT
 ```
 
-### 4. Revoke Revocable Transaction
+### 4. 撤销可撤销交易
 
-**Command**
+**命令**
 ```bash
 gatecli revocable-tx revoke [transaction Hash] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| transaction Hash | String | Hash of the transaction to revoke |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| transaction Hash | String | 要撤销的交易哈希值 |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli revocable-tx revoke 0E3B67C685C271632CE6F4DAA2AB06AF7E8077509E1CB5310F63F6C147786E12 --from vault11fg056uaatk9s3k6l34eqkc7qchjup8e39afauf9naz4jmpklsze3uwx6405vll88l5lvww --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: REVOKE-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
 
-## Delegation Management
+## 委托管理
 
-### 1. Delegate Token To Consensus Account
+### 1. 委托代币到共识账户
 
-**Command**
+**命令**
 ```bash
 gatecli staking delegate [consensus account address] [amount] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account address | String | Address of the consensus account to delegate to |
-| amount | String | Amount of tokens to delegate |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| consensus account address | String | 要委托的共识账户地址 |
+| amount | String | 要委托的代币数量 |
+| sender account | String | 发送者的账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking delegate gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: DELEGATE-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
@@ -1035,12 +1021,12 @@ Raw Log: sync broadcast tx success
 ```
 ### 2. Query Delegation Information of A Delegator Account In A Consensus Account
 
-**Command**
+**命令**
 ```bash
 gatecli staking delegation [delegator account address] [consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
 | Parameter | Type | Description |
 |------|------|------|
@@ -1048,12 +1034,12 @@ gatecli staking delegation [delegator account address] [consensus account addres
 | consensus account address | String | Address of the consensus account |
 | chain-id | String | Chain ID of the network |
 
-**Example**
+**示例**
 ```bash
 gatecli staking delegation gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Delegation:
   Delegator: gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq
@@ -1062,24 +1048,24 @@ Delegation:
 ```
 ### 3. Query Delegation Information of A Delegator Account In All Consensus Accounts 
 
-**Command**
+**命令**
 ```bash
 gatecli staking delegations [delegator account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| delegator account address | String | Address of the delegator account |
-| chain-id | String | Chain ID of the network |
+| delegator account address | String | 委托人账户的地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking delegations gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Delegation:
   Delegator: gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq
@@ -1089,57 +1075,57 @@ Delegation:
   ...
 ```
 
-### 4. Shift Delegation
+### 4. 转移委托
 
-**Command**
+**命令**
 ```bash
 gatecli staking redelegate [source consensus account address] [target consensus account address] [delegation token amount ] --from [delegator account address] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| source consensus account address | String | Address of the source consensus account |
-| target consensus account address | String | Address of the target consensus account |
-| delegation token amount | String | Amount of tokens to delegate |
-| delegator account address | String | Address of the delegator account |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| source consensus account address | String | 源共识账户地址 |
+| target consensus account address | String | 目标共识账户地址 |
+| delegation token amount | String | 委托代币数量 |
+| delegator account address | String | 委托人账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking redelegate gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla54 100000000NANOGT --from gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
  TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
-  //Transaction hash，using gatecli tx show {hash}to query details of this transaction.
+  //Transaction hash,using gatecli tx show {hash}to query details of this transaction.
   Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
   Raw Log: sync broadcast tx success //transaction is sent successfully
 ```
 
-### 5. Query All Delegation Shifts of A Specific Delegator Account
+### 5. 查询特定委托人的所有转移委托
 
-**Command**
+**命令**
 ```bash
 gatecli staking redelegations [delegator account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| delegator account address | String | Address of the delegator account |
-| chain-id | String | Chain ID of the network |
+| delegator account address | String | 委托人账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking redelegations gt11p8qmx5q8h7h3es3wl4x0y4efgme552hk7x5g6ppeelel2v2vvsthxk0ce65gw9mfls9ugp --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Redelegations between:
   Delegator:                   gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s //delegator account address
@@ -1156,28 +1142,28 @@ Redelegations between:
  ...
 ```
 
-### 7. Query Delegation Shifts Between Two Consensus Accounts For A Delegator Account
+### 7. 查询特定委托人的两个共识账户之间的转移委托
 
-**Command**
+**命令**
 ```bash
 gatecli staking redelegation [delegator account address] [source consensus account address] [target consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| delegator account address | String | Address of the delegator account |
-| source consensus account address | String | Address of the source consensus account |
-| target consensus account address | String | Address of the target consensus account |
-| chain-id | String | Chain ID of the network |
+| delegator account address | String | 委托人账户地址 |
+| source consensus account address | String | 源共识账户地址 |
+| target consensus account address | String | 目标共识账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking redelegation gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 gt11ewdeyjdlxs2x4yglnhtulp0tclgdp7c2t8d5c6495r83qvrfr7p0qt40uddu3k44s7rxg6 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Redelegations between:
   Delegator:                   gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s //delegator account address
@@ -1192,29 +1178,29 @@ Redelegations between:
       Balance:                   10 //token amount of shift delegation 
 ```
 
-### 8.Undelegate From A Consensus Account
+### 8. 从共识账户取消委托
 
-**Command**
+**命令**
 ```bash
 gatecli staking undelegate [consensus account address] [amount] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account address | String | Address of the consensus account to undelegate from |
-| amount | String | Amount of tokens to undelegate |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| consensus account address | String | 共识账户地址 |
+| amount | String | 取消委托的代币数量 |
+| sender account | String | 发送者账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking undelegate gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: UNDELEGATE-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
@@ -1222,53 +1208,53 @@ Raw Log: sync broadcast tx success
 ```
 ### 9.Release of delegation through security account
 
-**Command**
+**命令**
 ```bash
 gatecli staking undelegate-by-retrieval-account [vault account1 vault account2...] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| vault account1 vault account2... | String | Address of the vault account |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| vault account1 vault account2... | String | 安全账户地址 |
+| sender account | String | 发送者账户地址 |
+| tx fees | String | 交易费用（例如，100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking undelegate-by-retrieval-account vault11d9t6... vault11w8c3v... --from gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
   TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
   //Transaction hash,using gatecli tx show {hash}to query details of this transaction.
   Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
   Raw Log: sync broadcast tx success //transaction is sent successfully
 ```
-### 10.Query Undelegations of A Delegator Account in A consensus Account
+### 10. 查询特定委托人在共识账户中的取消委托
 
-**Command**
+**命令**
 ```bash
 gatecli staking undelegation [delegator account address] [consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| delegator account address | String | Address of the delegator account |
-| consensus account address | String | Address of the consensus account |
-| chain-id | String | Chain ID of the network |
+| delegator account address | String | 委托人账户地址 |
+| consensus account address | String | 共识账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking undelegation gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s gt11ewdeyjdlxs2x4yglnhtulp0tclgdp7c2t8d5c6495r83qvrfr7p0qt40uddu3k44s7rxg6 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Undelegations between:
   Delegator:   gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s //delegator account address
@@ -1280,26 +1266,26 @@ Undelegations between:
 		Expected balance:          10 //undelegated amount
 ```
 
-### 11.Query Undelegations of A Delegator Account in All consensus Accounts 
+### 11. 查询特定委托人在所有共识账户中的取消委托
 
-**Command**
+**命令**
 ```bash
 gatecli staking undelegations [delegator account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| delegator account address | String | Address of the delegator account |
-| chain-id | String | Chain ID of the network |
+| delegator account address | String | 委托人账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking undelegations gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Undelegations between:
   Delegator:   gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s //delegator  account address
@@ -1313,26 +1299,26 @@ Undelegations between:
 	...
 ```
 
-### 12.Query All Delegations Of A Specific Consensus Account
+### 12. 查询特定共识账户的所有委托
 
-**Command**
+**命令**
 ```bash
 gatecli staking delegations-to [consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account address | String | Address of the consensus account |
-| chain-id | String | Chain ID of the network |
+| consensus account address | String | 共识账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking delegations-to gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Delegation:
   Delegator:   gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s //delegator account address
@@ -1342,26 +1328,26 @@ Delegation:
 	...
 ```
 
-### 13.Query All Delegation Shifts For A Specific Consensus Account 
+### 13. 查询特定共识账户的所有委托转移
 
-**Command**
+**命令**
 ```bash
 gatecli staking redelegations-from [consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account address | String | Address of the consensus account |
-| chain-id | String | Chain ID of the network |
+| consensus account address | String | 共识账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking redelegations-from gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Redelegations between:
   Delegator:                   gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s //delegator account address
@@ -1376,26 +1362,26 @@ Redelegations between:
       Balance:                   10 //token amount of shift delegation 
 ```
 
-### 14.Query All Undelegations Of A Specific Consensus Account
+### 14. 查询特定共识账户的所有取消委托
 
-**Command**
+**命令**
 ```bash
 gatecli staking undelegations-from  [consensus account address] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| consensus account address | String | Address of the consensus account |
-| chain-id | String | Chain ID of the network |
+| consensus account address | String | 共识账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli staking undelegations-from gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Undelegations between:
   Delegator:   gt11m5acrv46s5xzr8r3h8f3z9hz8wdl3ucfcmw6ssac2kfvad649u6nfzhx2rpk4ucvrxla6s //delegator account address
@@ -1410,40 +1396,40 @@ Undelegations between:
 ```
 
 
-### 15. Query Staking Pool
+### 15. 查询质押池
 
-**Command**
+**命令**
 ```bash
 gatecli staking pool --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| chain-id | String | Chain ID of the network |
+| chain-id | String | 链 ID |
 
-**Response Example**
+**响应示例**
 ```
 Pool:
   Not Bonded Tokens:  10000
   Bonded Tokens:      0
 ```
 
-### 16. Query Staking Parameters
+### 16. 查询质押参数
 
-**Command**
+**命令**
 ```bash
 gatecli staking params --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| chain-id | String | Chain ID of the network |
+| chain-id | String | 链 ID |
 
-**Response Example**
+**响应示例**
 ```
 Params:
   Undelegating Time:    504h0m0s
@@ -1454,28 +1440,28 @@ Params:
   Max Pow Rate:      2
 ```
 
-## Foundation Management
+## 基金会管理
 
 
-### 1. Initialize
+### 1. 初始化
 
-**Command**
+**命令**
 ```bash
 gated add-foundation [config file path]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| config file path | String | Path to the configuration file |
+| config file path | String | 配置文件路径 |
 
-**Example**
+**示例**
 ```bash
 gated add-foundation foundation.json
 ```
 
-**Response Example**
+**响应示例**
 ```
 {
     "members":[
@@ -1507,31 +1493,31 @@ gated add-foundation foundation.json
 }
 ```
 
-**Description**
-- Foundation initialization must be executed when genesis block is initializing.
-- max_members:indicates maximum members the foundation allows
-- members:foundation member,address(member account),proportion(proportion held by the member)
+**描述**
+- 基金会初始化必须在创世块初始化时执行。
+- max_members: 表示基金会允许的最大成员数。
+- members: 基金会成员，地址（成员账户地址），比例（成员持有的比例）。
 
 
-### 2. Query Foundation Member List
+### 2. 查询基金会成员列表
 
-**Command**
+**命令**
 ```bash
 gatecli foundation members --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| chain-id | String | Chain ID of the network |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli foundation members --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Member:
   Address:     gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq
@@ -1543,94 +1529,94 @@ Member:
   ...
 ```
 
-### 3. Foundation Members Withdraw Tokens
+### 3. 基金会成员提款
 
-**Command**
+**命令**
 ```bash
 gatecli foundation withdraw [amount] --from [foundation members] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| amount | String | Amount of tokens to withdraw |
-| foundation members | String | Address of the foundation member |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| amount | String | 提款金额 |
+| foundation members | String | 基金会成员地址 |
+| tx fees | String | 交易费用（例如100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli foundation withdraw 10NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
 
-## Token Management
+## 代币管理
 
-### 1. Issue Token
+### 1. 发行代币
 
-**Command**
+**命令**
 ```bash
 gatecli token issue [token symbol] [token amount] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| token symbol | String | Symbol of the token to issue |
-| token amount | String | Amount of tokens to issue |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| token symbol | String | 代币符号 |
+| token amount | String | 代币数量 |
+| sender account | String | 发送者账户地址 |
+| tx fees | String | 交易费用（例如100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli token issue "ABC" 100000000 --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: ISSUE-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
 
-**Description**
-- Token issuance incurs a fee of 200000000000NANOGT, please make sure you have adequate NANOGT token at account.
-- Token symbol must be all in upper case, 2-15 characters long.
-- In token creation, there are another two flags:
-  - - '--mintable' whether the token can be additionally issued or not
-  - -'--freezable' whether the token can be frozen or not
+**描述**
+- 发行代币会产生200000000000NANOGT的费用，请确保您的账户有足够的NANOGT代币。
+- 代币符号必须全部大写，长度为2-15个字符。
+- 在创建代币时，还有另外两个标志：
+  - - '--mintable' 是否可以额外发行代币
+  - - '--freezable' 是否可以冻结代币
 
 
-### 2.Issue Additional Token
+### 2. 发行额外代币
 
-**Command**
+**命令**
 ```bash
 gatecli token mint [token amount] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| token amount | String | Amount of tokens to issue |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| token amount | String | 代币数量 |
+| sender account | String | 发送者账户地址 |
+| tx fees | String | 交易费用（例如100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli token mint 100000000000AAA-94f --from gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 --fees 100000NANOGT --chain-id testnet
 ```
-**Response Example**
+**响应示例**
 ```
   TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
   //transaction hash, using gatecli tx show {hash}to query details of this transaction
@@ -1638,32 +1624,32 @@ gatecli token mint 100000000000AAA-94f --from gt11dsck7f7txdc7hz5wdsspey0w5eyhw7
   Raw Log: sync broadcast tx success //transaction is sent successfully
 ```
 
-**Description**
-- additional issued tokens must use parameter --mintable when issuing.
-- The unit of token amount is the onchain token symbol（AAA-94f）
-- The sum of additional issued tokens and the previously issued tokens should not exceed the default cap （10 billion）
+**描述**
+- 额外发行的代币必须使用参数 --mintable 在发行时使用。
+- 代币数量的单位是链上代币符号（AAA-94f）
+- 额外发行的代币数量和之前发行的代币数量之和不应超过默认上限（100亿）
   
-### 3.Freeze Token
+### 3. 冻结代币
 
-**Command**
+**命令**
 ```bash
 gatecli token freeze [onchain token symbol] --from [sender account] --fees [tx fees] --chain-id [chain ID] 
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| onchain token symbol | String | Symbol of the token to freeze |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| onchain token symbol | String | 代币符号 |
+| sender account | String | 发送者账户地址 |
+| tx fees | String | 交易费用（例如100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli token freeze AAA-94f --from gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 --fees 100000NANOGT --chain-id testnet
 ```
-**Response Example**
+**响应示例**
 ```
  TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
   //transaction hash, using gatecli tx show {hash}to query details of this transaction
@@ -1671,50 +1657,50 @@ gatecli token freeze AAA-94f --from gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r
   Raw Log: sync broadcast tx success //transaction is sent successfully
 ```
 
-**Description**
-- For token to freeze, parameter--freezable must be used when issuing.
+**描述**
+- 冻结代币时，必须使用参数 --freezable 在发行时使用。
 
 
-### 4. Unfreeze Token
+### 4. 解冻代币
 
-**Command**
+**命令**
 ```bash
 gatecli token unfreeze [token amount] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| token amount | String | Amount of tokens to unfreeze (e.g., 100000NANOGT) |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| token amount | String | 代币数量 |
+| sender account | String | 发送者账户地址 |
+| tx fees | String | 交易费用（例如100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli token unfreeze 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
 
-**Notes**
-- Token amount must be specified with the onchain token symbol (e.g., AAA-94f)
+**注释**
+- 代币数量必须使用链上代币符号（例如AAA-94f）
 
 
 ### 5. Burn Token
 
-**Command**
+**命令**
 ```bash
 gatecli token burn [token amount] --from [sender account] --fees [tx fees] --chain-id [chain ID] 
 ```
 
-**Parameters**
+**参数**
 
 | Parameter | Type | Description |
 |------|------|------|
@@ -1723,12 +1709,12 @@ gatecli token burn [token amount] --from [sender account] --fees [tx fees] --cha
 | tx fees | String | Transaction fees (e.g., 100000NANOGT) |
 | chain-id | String | Chain ID of the network |
 
-**Example**
+**示例**
 ```bash
 gatecli token burn 100000000000AAA-94f  --from gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: BASIC-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376 
 //transaction hash, using gatecli tx show {hash}to query details of this transaction
@@ -1736,29 +1722,29 @@ Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDB
 Raw Log: sync broadcast tx success //transaction is sent successfully
 ```
 
-**Notes**
-- The unit of token amount is onchain token symbol（AAA-94f）
+**注释**
+- 代币数量必须使用链上代币符号（例如AAA-94f）
 
-### 6. Query Token Information
+### 6. 查询代币信息
 
-**Command**
+**命令**
 ```bash
 gatecli token show [token symbol] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| token symbol | String | Symbol of the token to query |
-| chain-id | String | Chain ID of the network |
+| token symbol | String | 代币符号 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli token show ABC-94F --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Token:
   Symbol:          ABC-94F
@@ -1770,25 +1756,25 @@ Token:
   WithdrawLock:    0
 ```
 
-### 7. Query All Tokens
+### 7. 查询所有代币
 
-**Command**
+**命令**
 ```bash
 gatecli token list --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| chain-id | String | Chain ID of the network |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli token list --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Token:
   Symbol:          ABC-94F
@@ -1802,57 +1788,57 @@ Token:
   ...
 ```
 
-## Transfer Management
+## 转账管理
 
-### 1. Send Transaction
+### 1. 发送交易
 
-**Command**
+**命令**
 ```bash
 gatecli tx send [recipient account] [amount] --from [sender account] --fees [tx fees] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| recipient account | String | Account address of the recipient |
-| amount | String | Amount of tokens to transfer |
-| sender account | String | Account address of the sender |
-| tx fees | String | Transaction fees (e.g., 100000NANOGT) |
-| chain-id | String | Chain ID of the network |
+| recipient account | String | 接收者账户地址 |
+| amount | String | 转账金额 |
+| sender account | String | 发送者账户地址 |
+| tx fees | String | 交易费用（例如100000NANOGT） |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli tx send gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq 100000NANOGT --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --fees 100000NANOGT --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: TRANSFER-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
 
-### 2. Query a Single Transaction
+### 2. 查询单笔交易
 
-**Command**
+**命令**
 ```bash
 gatecli tx show [transaction  Hash] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| transaction hash | String | Transaction hash |
-| chain-id | String | Chain ID of the network |
+| transaction hash | String | 交易哈希 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli tx show 03190D3F56D6B65CC11BFE3F9CD961729B134D224A35AC731728601C9DD3A3C7 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 Response:
   Height: 761 //block height of transaction
@@ -1875,9 +1861,9 @@ Response:
 ```
 
 
-### 3. Query Transaction List based on Criteria
+### 3. 根据条件查询交易列表
 
-**Command**
+**命令**
 ```bash
 gatecli tx search 
 --tags [<tag1>:<value1>&<tag2>:<value2>] 
@@ -1886,21 +1872,21 @@ gatecli tx search
 --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| tags | String | Transaction tags |
-| page | String | Page number |
-| limit | String | Entries per page |
-| chain-id | String | Chain ID of the network |
+| tags | String | 交易标签 |
+| page | String | 页码 |
+| limit | String | 每页条数 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli tx search --tags 'tx.height:771&message.sender:gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7' --page 1 --limit 30 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 [
     {
@@ -2038,51 +2024,51 @@ gatecli tx search --tags 'tx.height:771&message.sender:gt11dsck7f7txdc7hz5wdsspe
     }
 ]
 ```
-### 4. Single Signature
+### 4. 单签
 
-**Command**
+**命令**
 ```bash
 gatecli tx sign [tx file] --from [sender account] --chain-id [chain ID] --generate-only
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| tx file | String | Path to the transaction file |
-| sender account | String | Account address of the sender |
-| chain-id | String | Chain ID of the network |
+| tx file | String | 交易文件路径 |
+| sender account | String | 发送者账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli tx sign unsignedTx.json --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq --chain-id testnet --generate-only > signedTx.json
 ```
 
-**Notes**
-- The signed transaction will be saved to the specified output file
+**注释**
+- 单签交易将保存到指定输出文件
 
-### 5. Multi-signature signatures
+### 5. 多签
 
-**Command**
+**命令**
 ```bash
 gatecli tx multisign [tx file] [multisig account name] [signer-1 account] [signer-2 account] ... [signer-n account] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| tx file | String | Path to the transaction file |
-| multisig account name | String | Name of the multisig account |
-| signer account | String | Account address of each signer |
-| chain-id | String | Chain ID of the network |
+| tx file | String | 交易文件路径 |
+| multisig account name | String | 多签账户名称 |
+| signer account | String | 每个签名者的账户地址 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli tx multisign unsignedTx.json gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: MULTISIGN-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
@@ -2091,51 +2077,51 @@ Raw Log: sync broadcast tx success
 
 
 
-### 6. Broadcast Transaction
+### 6. 广播交易
 
-**Command**
+**命令**
 ```bash
 gatecli tx broadcast [tx file] --chain-id [chain ID]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| tx file | String | Path to the signed transaction file |
-| chain-id | String | Chain ID of the network |
+| tx file | String | 交易文件路径 |
+| chain-id | String | 链 ID |
 
-**Example**
+**示例**
 ```bash
 gatecli tx broadcast signedTx.json --chain-id testnet
 ```
 
-**Response Example**
+**响应示例**
 ```
 TxHash: BROADCAST-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355CA38CD75AFFDF597794159D9356BE0376
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
 
-### 7.Encoding
+### 7. 编码
 
-**Command**
+**命令**
 ```bash
 gatecli tx encode [file path]
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| file path | String | Path to the transaction file |
+| file path | String | 交易文件路径 |
 
-**Example**
+**示例**
 ```bash
 gatecli tx encode tx_sign.json
 ```
 
-**Response Example**
+**响应示例**
 ```
 vAG5zc/tCmrcKqCFCihsMW8nyzNx64qObCAcke6mSXd4kqmHiPdDq6q4lEW1aDPq6/iNJOhUEihVZVapclvx5gwUyOs1WgQNIlRZij2GOBM0JtRFbTTNmIVD08kb3a7iGhAKBk5BTk9HVBIGMTAwMDAwEhIKDAoGTkFOT0dUEgIxMRDAmgwaMHZI3vYAiiIVpsyR/xtwvbu9zTfr0vxZUmT7lhu3unO0lOsHGyPZ3GqlJ9La3c5L7DIEoAboBw==
 ```

@@ -1,10 +1,10 @@
-# JSON-RPC Server
+# JSON-RPC 服务器
 
-Because GateChain EVM is basically compatible with Ethereum, much of the content in this document comes from the contribution of Ethereum EVM documents.
+由于 GateChain EVM 基本兼容以太坊，本文档中的大部分内容来自以太坊 EVM 文档的贡献。
 
-## JSON-RPC Methods
+## JSON-RPC 方法
 
-| Method | Namespace | Implemented | Notes |
+| 方法 | 命名空间 | 是否已实现 | 备注 |
 |--------|-----------|-------------|--------|
 | [web3_clientVersion](#web3_clientVersion) | Web3 | ✔ | |
 | [web3_sha3](#web3_sha3) | Web3 | ✔ | |
@@ -33,20 +33,20 @@ Because GateChain EVM is basically compatible with Ethereum, much of the content
 
 ### web3_clientVersion
 
-Returns the current client version.
+返回当前客户端版本。
 
-#### Parameters
-None
+#### 参数
+无
 
-#### Returns
-String - The current client version
+#### 返回值
+String - 当前客户端版本
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}'
 
-// Result
+// 结果
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -56,25 +56,25 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],
 
 ### web3_sha3
 
-Returns Keccak-256 (not the standardized SHA3-256) of the given data.
+返回给定数据的 Keccak-256 哈希值（注意：这不是标准的 SHA3-256）。
 
-#### Parameters
-DATA - the data to convert into a SHA3 hash
+#### 参数
+DATA - 需要转换为 SHA3 哈希的数据
 ```json
 params: [
   "0x68656c6c6f20776f726c64"
 ]
 ```
 
-#### Returns
-DATA - The SHA3 result of the given string.
+#### 返回值
+DATA - 给定字符串的 SHA3 结果。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"web3_sha3","params":["0x68656c6c6f20776f726c64"],"id":64}'
 
-// Result
+// 结果
 {
   "id":64,
   "jsonrpc": "2.0",
@@ -84,21 +84,21 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"web3_sha3","params":["0x68656c6c
 
 ### net_version
 
-Returns the current network id.
+返回当前网络 ID。
 
-#### Parameters
-None
+#### 参数
+无
 
-#### Returns
-String - The current network id.
-- "86": Mainnet
+#### 返回值
+String - 当前网络 ID
+- "86": 主网
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":67}'
 
-// Result
+// 结果
 {
   "id":67,
   "jsonrpc": "2.0",
@@ -108,20 +108,20 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":67
 
 ### eth_protocolVersion
 
-Returns the current ethereum protocol version.
+返回当前以太坊协议版本。
 
-#### Parameters
-None
+#### 参数
+无
 
-#### Returns
-String - The current ethereum protocol version
+#### 返回值
+String - 当前以太坊协议版本
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_protocolVersion","params":[],"id":67}'
 
-// Result
+// 结果
 {
   "id":67,
   "jsonrpc": "2.0",
@@ -131,23 +131,23 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_protocolVersion","params":[]
 
 ### eth_syncing
 
-Returns an object with data about the sync status or false.
+返回一个包含同步状态数据的对象，如果未在同步则返回 false。
 
-#### Parameters
-None
+#### 参数
+无
 
-#### Returns
-Object|Boolean, An object with sync status data or FALSE, when not syncing:
-- startingBlock: QUANTITY - The block at which the import started (will only be reset, after the sync reached his head)
-- currentBlock: QUANTITY - The current block, same as eth_blockNumber
-- highestBlock: QUANTITY - The estimated highest block
+#### 返回值
+Object|Boolean，一个包含同步状态数据的对象，或者当未在同步时返回 FALSE：
+- startingBlock: QUANTITY - 导入开始时的区块（仅在同步到达区块头后重置）
+- currentBlock: QUANTITY - 当前区块，与 eth_blockNumber 相同
+- highestBlock: QUANTITY - 预估的最高区块
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
 
-// Result
+// 结果
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -156,7 +156,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}
     }
 }
 
-// Or when not syncing
+// 或者当未在同步时
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -166,20 +166,20 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}
 
 ### eth_gasPrice
 
-Returns the current price per gas in wei.
+返回当前的 gas 价格（以 wei 为单位）。
 
-#### Parameters
-None
+#### 参数
+无
 
-#### Returns
-QUANTITY - integer of the current gas price in wei.
+#### 返回值
+QUANTITY - 当前 gas 价格的整数值（以 wei 为单位）。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_gasPrice","params":[],"id":73}'
 
-// Result
+// 结果
 {
   "id":73,
   "jsonrpc": "2.0",
@@ -189,20 +189,20 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_gasPrice","params":[],"id":7
 
 ### eth_accounts
 
-Returns a list of addresses owned by client.
+返回客户端拥有的地址列表。
 
-#### Parameters
-None
+#### 参数
+无
 
-#### Returns
-Array of DATA, 20 Bytes - addresses owned by the client.
+#### 返回值
+Array of DATA, 20 字节 - 客户端拥有的地址列表。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}'
 
-// Result
+// 结果
 {
     "jsonrpc": "2.0",
     "id": 1,
@@ -216,20 +216,20 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1
 
 ### eth_blockNumber
 
-Returns the number of most recent block.
+返回最新区块的编号。
 
-#### Parameters
-None
+#### 参数
+无
 
-#### Returns
-QUANTITY - integer of the current block number the client is on.
+#### 返回值
+QUANTITY - 客户端当前所在的区块号整数值。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}'
 
-// Result
+// 结果
 {
   "id":83,
   "jsonrpc": "2.0",
@@ -239,13 +239,13 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id
 
 ### eth_getBalance
 
-Returns the balance of the account of given address.
+返回指定地址的账户余额。
 
-#### Parameters
-- DATA, 20 Bytes - address to check for balance.
-- QUANTITY|TAG - integer block number, or the string "latest", "earliest" or "pending"
+#### 参数
+- DATA, 20 字节 - 要查询余额的地址
+- QUANTITY|TAG - 区块号整数，或字符串 "latest"、"earliest" 或 "pending"
 
-Example:
+示例：
 ```json
 params: [
    '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
@@ -253,15 +253,15 @@ params: [
 ]
 ```
 
-#### Returns
-QUANTITY - integer of the current balance in wei.
+#### 返回值
+QUANTITY - 当前余额的整数值（以 wei 为单位）。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0x407d73d8a49eeb85d32cf465507dd71d507100c1", "latest"],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -271,18 +271,18 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0x407
 
 ### eth_getStorageAt
 
-Returns the value from a storage position at a given address.
+返回给定地址的存储位置的值。
 
-#### Parameters
-- DATA, 20 Bytes - address of the storage.
-- QUANTITY - integer of the position in the storage.
-- QUANTITY|TAG - integer block number, or the string "latest", "earliest" or "pending"
+#### 参数
+- DATA, 20 字节 - 存储的地址
+- QUANTITY - 存储中位置的整数值
+- QUANTITY|TAG - 区块号整数，或字符串 "latest"、"earliest" 或 "pending"
 
-#### Returns
-DATA - the value at this storage position.
+#### 返回值
+DATA - 该存储位置的值。
 
-#### Example
-Calculating the correct position depends on the storage to retrieve. Consider the following contract deployed at `0x391694e7e0b0cce554cb130d723a9d27458f9298` by address `0x295a70b2de5e3953354a6a8344e616ed314d7251`.
+#### 示例
+计算正确的位置取决于要检索的存储。考虑以下由地址 `0x295a70b2de5e3953354a6a8344e616ed314d7251` 部署在 `0x391694e7e0b0cce554cb130d723a9d27458f9298` 的合约。
 
 ```solidity
 contract Storage {
@@ -296,13 +296,13 @@ contract Storage {
 }
 ```
 
-Retrieving the value of pos0 is straight forward:
+检索 pos0 的值很直接：
 
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "latest"], "id": 1}' localhost:8545
 
-// Result
+// 结果
 {
   "jsonrpc":"2.0",
   "id":1,
@@ -310,17 +310,17 @@ curl -X POST --data '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": [
 }
 ```
 
-Retrieving an element of the map is harder. The position of an element in the map is calculated with:
+检索映射中的元素较为复杂。映射中元素的位置计算方式为：
 ```
 keccack(LeftPad32(key, 0), LeftPad32(map position, 0))
 ```
 
-This means to retrieve the storage on pos1["0x391694e7e0b0cce554cb130d723a9d27458f9298"] we need to calculate the position with:
+这意味着要检索 pos1["0x391694e7e0b0cce554cb130d723a9d27458f9298"] 的存储，我们需要用以下方式计算位置：
 ```
 keccak(decodeHex("000000000000000000000000391694e7e0b0cce554cb130d723a9d27458f9298" + "0000000000000000000000000000000000000000000000000000000000000001"))
 ```
 
-The geth console which comes with the web3 library can be used to make the calculation:
+可以使用带有 web3 库的 geth 控制台进行计算：
 ```javascript
 > var key = "000000000000000000000000391694e7e0b0cce554cb130d723a9d27458f9298" + "0000000000000000000000000000000000000000000000000000000000000001"
 undefined
@@ -328,12 +328,12 @@ undefined
 "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9"
 ```
 
-Now to fetch the storage:
+现在获取存储：
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9", "latest"], "id": 1}' localhost:8545
 
-// Result
+// 结果
 {
   "jsonrpc":"2.0",
   "id":1,
@@ -343,29 +343,29 @@ curl -X POST --data '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": [
 
 ### eth_getTransactionCount
 
-Returns the number of transactions sent from an address.
+返回从一个地址发送的交易数量。
 
-#### Parameters
-- DATA, 20 Bytes - address.
-- QUANTITY|TAG - integer block number, or the string "latest", "earliest" or "pending"
+#### 参数
+- DATA, 20 字节 - 地址
+- QUANTITY|TAG - 区块号整数，或字符串 "latest"、"earliest" 或 "pending"
 
-Example:
+示例：
 ```json
 params: [
    '0x407d73d8a49eeb85d32cf465507dd71d507100c1',
-   'latest' // state at the latest block
+   'latest' // 最新区块的状态
 ]
 ```
 
-#### Returns
-QUANTITY - integer of the number of transactions send from this address.
+#### 返回值
+QUANTITY - 从该地址发送的交易数量的整数值。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["0x407d73d8a49eeb85d32cf465507dd71d507100c1","latest"],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -375,27 +375,27 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionCount","params
 
 ### eth_getBlockTransactionCountByNumber
 
-Returns the number of transactions in a block matching the given block number.
+返回与给定区块号匹配的区块中的交易数量。
 
-#### Parameters
-QUANTITY|TAG - integer of a block number, or the string "earliest", "latest" or "pending"
+#### 参数
+QUANTITY|TAG - 区块号整数，或字符串 "earliest"、"latest" 或 "pending"
 
-Example:
+示例：
 ```json
 params: [
    '0xe8', // 232
 ]
 ```
 
-#### Returns
-QUANTITY - integer of the number of transactions in this block.
+#### 返回值
+QUANTITY - 该区块中的交易数量的整数值。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByNumber","params":["0xe8"],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -405,27 +405,27 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByNu
 
 ### eth_getBlockTransactionCountByHash
 
-Returns the number of transactions in a block from a block matching the given block hash.
+返回与给定区块哈希匹配的区块中的交易数量。
 
-#### Parameters
-DATA, 32 Bytes - hash of a block
+#### 参数
+DATA, 32 字节 - 区块的哈希值
 
-Example:
+示例：
 ```json
 params: [
    '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
 ]
 ```
 
-#### Returns
-QUANTITY - integer of the number of transactions in this block.
+#### 返回值
+QUANTITY - 该区块中的交易数量的整数值。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByHash","params":["0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -435,13 +435,13 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByHa
 
 ### eth_getCode
 
-Returns code at a given address.
+返回给定地址的代码。
 
-#### Parameters
-- DATA, 20 Bytes - address
-- QUANTITY|TAG - integer block number, or the string "latest", "earliest" or "pending"
+#### 参数
+- DATA, 20 字节 - 地址
+- QUANTITY|TAG - 区块号整数，或字符串 "latest"、"earliest" 或 "pending"
 
-Example:
+示例：
 ```json
 params: [
    '0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b',
@@ -449,15 +449,15 @@ params: [
 ]
 ```
 
-#### Returns
-DATA - the code from the given address.
+#### 返回值
+DATA - 给定地址的代码。
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getCode","params":["0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b", "0x2"],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -467,26 +467,26 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getCode","params":["0xa94f53
 
 ### eth_sign
 
-The sign method calculates an Ethereum specific signature with: `sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message)))`.
+sign 方法使用以下方式计算以太坊特定的签名：`sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message)))`。
 
-By adding a prefix to the message makes the calculated signature recognisable as an Ethereum specific signature. This prevents misuse where a malicious DApp can sign arbitrary data (e.g. transaction) and use the signature to impersonate the victim.
+通过在消息前添加前缀，使计算出的签名可识别为以太坊特定的签名。这可以防止恶意 DApp 签署任意数据（例如交易）并使用签名冒充受害者的滥用情况。
 
-> Note the address to sign with must be unlocked.
+> 注意：用于签名的地址必须处于解锁状态。
 
-#### Parameters
+#### 参数
 - account, message
-- DATA, 20 Bytes - address
-- DATA, N Bytes - message to sign
+- DATA, 20 字节 - 地址
+- DATA, N 字节 - 要签名的消息
 
-#### Returns
-DATA: Signature
+#### 返回值
+DATA: 签名
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sign","params":["0x9b2055d370f73ec7d8a03e965129118dc8f5bf83", "0xdeadbeaf"],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -496,19 +496,21 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sign","params":["0x9b2055d37
 
 ### eth_sendTransaction
 
-Creates new message call transaction or a contract creation, if the data field contains code.
+创建新的消息调用交易或合约创建（如果数据字段包含代码）。
 
-#### Parameters
-Object - The transaction object:
-- from: DATA, 20 Bytes - The address the transaction is send from.
-- to: DATA, 20 Bytes - (optional when creating new contract) The address the transaction is directed to.
-- gas: QUANTITY - (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
-- gasPrice: QUANTITY - (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
-- value: QUANTITY - (optional) Integer of the value sent with this transaction
-- data: DATA - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters.
-- nonce: QUANTITY - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
+#### 参数
+Object - 交易对象：
+- from: DATA, 20 字节 - 交易发送方的地址
+- to: DATA, 20 字节 - （创建新合约时可选）交易接收方的地址
+- gas: QUANTITY - （可选，默认值：90000）为交易执行提供的 gas 整数值。未使用的 gas 将被返回
+- gasPrice: QUANTITY - gas price provided by the sender in Wei.
+- value: QUANTITY - （可选）随交易发送的值的整数值
+- data: DATA - 合约的编译代码或被调用方法签名的哈希值和编码参数
+- nonce: QUANTITY - （可选）nonce 的整数值。这允许覆盖使用相同 nonce 的自己的待处理交易
+- gas: QUANTITY - gas provided by the sender.
+- input: DATA - the data send along with the transaction.
 
-Example:
+示例：
 ```json
 params: [{
   "from": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
@@ -516,21 +518,23 @@ params: [{
   "gas": "0x76c0", // 30400
   "gasPrice": "0x9184e72a000", // 10000000000000
   "value": "0x9184e72a", // 2441406250
-  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
+  "gas": "0x76c0", // 30400
+  "input": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
 }]
 ```
 
-#### Returns
-DATA, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
+#### 返回值
+DATA, 32 字节 - 交易哈希，如果交易尚不可用则返回零哈希。
 
-Use eth_getTransactionReceipt to get the contract address, after the transaction was mined, when you created a contract.
+如果您创建了一个合约，请在交易被挖矿后使用 eth_getTransactionReceipt 获取合约地址。
 
-#### Example
+#### 示例
 ```json
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{see above}],"id":1}'
+// 请求
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{见上文}],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -540,27 +544,27 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{
 
 ### eth_sendRawTransaction
 
-Creates new message call transaction or a contract creation for signed transactions.
+为已签名的交易创建新的消息调用交易或合约创建。
 
-#### Parameters
-DATA, The signed transaction data.
+#### 参数
+DATA - 已签名的交易数据。
 
-Example:
+示例：
 ```json
 params: ["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"]
 ```
 
-#### Returns
-DATA, 32 Bytes - the transaction hash, or the zero hash if the transaction is not yet available.
+#### 返回值
+DATA, 32 字节 - 交易哈希，如果交易尚不可用则返回零哈希。
 
-Use eth_getTransactionReceipt to get the contract address, after the transaction was mined, when you created a contract.
+如果您创建了一个合约，请在交易被挖矿后使用 eth_getTransactionReceipt 获取合约地址。
 
-#### Example
+#### 示例
 ```json
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params":[{see above}],"id":1}'
+// 请求
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params":[{见上文}],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -570,28 +574,28 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params"
 
 ### eth_call
 
-Executes a new message call immediately without creating a transaction on the block chain.
+立即执行新的消息调用，而不在区块链上创建交易。
 
-#### Parameters
-1. Object - The transaction call object:
-   - from: DATA, 20 Bytes - (optional) The address the transaction is sent from.
-   - to: DATA, 20 Bytes - The address the transaction is directed to.
-   - gas: QUANTITY - (optional) Integer of the gas provided for the transaction execution.
-   - gasPrice: QUANTITY - (optional) Integer of the gasPrice used for each paid gas
-   - value: QUANTITY - (optional) Integer of the value sent with this transaction
-   - data: DATA - (optional) Hash of the method signature and encoded parameters.
+#### 参数
+1. Object - 交易调用对象：
+   - from: DATA, 20 字节 - （可选）交易发送方的地址
+   - to: DATA, 20 字节 - 交易接收方的地址
+   - gas: QUANTITY - （可选）为交易执行提供的 gas 整数值
+   - gasPrice: QUANTITY - （可选）每个已支付 gas 使用的 gasPrice 整数值
+   - value: QUANTITY - （可选）随交易发送的值的整数值
+   - data: DATA - （可选）方法签名的哈希值和编码参数
 
-2. QUANTITY|TAG - integer block number, or the string "latest", "earliest" or "pending"
+2. QUANTITY|TAG - 区块号整数，或字符串 "latest"、"earliest" 或 "pending"
 
-#### Returns
-DATA - the return value of executed contract.
+#### 返回值
+DATA - 已执行合约的返回值。
 
-#### Example
+#### 示例
 ```json
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_call","params":[{see above}],"id":1}'
+// 请求
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_call","params":[{见上文}],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -601,22 +605,22 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_call","params":[{see above}]
 
 ### eth_estimateGas
 
-Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain.
+生成并返回完成交易所需的 gas 估算值。该交易不会被添加到区块链中。
 
-> Note that the estimate may be significantly more than the amount of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance.
+> 注意：由于各种原因（包括 EVM 机制和节点性能），估算值可能会显著高于交易实际使用的 gas 量。
 
-#### Parameters
-See eth_call parameters, expect that all properties are optional. If no gas limit is specified geth uses the block gas limit from the pending block as an upper bound. As a result the returned estimate might not be enough to executed the call/transaction when the amount of gas is higher than the pending block gas limit.
+#### 参数
+参见 eth_call 参数，但所有属性都是可选的。如果未指定 gas 限制，geth 将使用待处理区块的区块 gas 限制作为上限。因此，当 gas 数量高于待处理区块 gas 限制时，返回的估算值可能不足以执行调用/交易。
 
-#### Returns
-QUANTITY - the amount of gas used.
+#### 返回值
+QUANTITY - 使用的 gas 量。
 
-#### Example
+#### 示例
 ```json
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_estimateGas","params":[{see above}],"id":1}'
+// 请求
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_estimateGas","params":[{见上文}],"id":1}'
 
-// Result
+// 结果
 {
   "id":1,
   "jsonrpc": "2.0",
@@ -626,13 +630,13 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_estimateGas","params":[{see 
 
 ### eth_getBlockByHash
 
-Returns information about a block by hash.
+通过哈希返回关于区块的信息。
 
-#### Parameters
-- DATA, 32 Bytes - Hash of a block.
-- Boolean - If true it returns the full transaction objects, if false only the hashes of the transactions.
+#### 参数
+- DATA, 32 字节 - 区块的哈希值
+- Boolean - 如果为 true 则返回完整的交易对象，如果为 false 则只返回交易的哈希值
 
-Example:
+示例：
 ```json
 params: [
    '0xdc0818cf78f21a8e70579cb46a43643f78291264dda342ae31049421c82d21ae',
@@ -640,35 +644,35 @@ params: [
 ]
 ```
 
-#### Returns
-Object - A block object, or null when no block was found:
+#### 返回值
+Object - 区块对象，如果未找到区块则返回 null：
 
-- number: QUANTITY - the block number. null when its pending block.
-- hash: DATA, 32 Bytes - hash of the block. null when its pending block.
-- parentHash: DATA, 32 Bytes - hash of the parent block.
-- nonce: DATA, 8 Bytes - hash of the generated proof-of-work. null when its pending block.
-- sha3Uncles: DATA, 32 Bytes - SHA3 of the uncles data in the block.
-- logsBloom: DATA, 256 Bytes - the bloom filter for the logs of the block. null when its pending block.
-- transactionsRoot: DATA, 32 Bytes - the root of the transaction trie of the block.
-- stateRoot: DATA, 32 Bytes - the root of the final state trie of the block.
-- receiptsRoot: DATA, 32 Bytes - the root of the receipts trie of the block.
-- miner: DATA, 20 Bytes - the address of the beneficiary to whom the mining rewards were given.
-- difficulty: QUANTITY - integer of the difficulty for this block.
-- totalDifficulty: QUANTITY - integer of the total difficulty of the chain until this block.
-- extraData: DATA - the "extra data" field of this block.
-- size: QUANTITY - integer the size of this block in bytes.
-- gasLimit: QUANTITY - the maximum gas allowed in this block.
-- gasUsed: QUANTITY - the total used gas by all transactions in this block.
-- timestamp: QUANTITY - the unix timestamp for when the block was collated.
-- transactions: Array - Array of transaction objects, or 32 Bytes transaction hashes depending on the last given parameter.
-- uncles: Array - Array of uncle hashes.
+- number: QUANTITY - 区块号。当其为待处理区块时为 null
+- hash: DATA, 32 字节 - 区块的哈希值。当其为待处理区块时为 null
+- parentHash: DATA, 32 字节 - 父区块的哈希值
+- nonce: DATA, 8 字节 - 生成的工作量证明的哈希值。当其为待处理区块时为 null
+- sha3Uncles: DATA, 32 字节 - 区块中叔块数据的 SHA3 值
+- logsBloom: DATA, 256 字节 - 区块日志的布隆过滤器。当其为待处理区块时为 null
+- transactionsRoot: DATA, 32 字节 - 区块的交易树根
+- stateRoot: DATA, 32 字节 - 区块的最终状态树根
+- receiptsRoot: DATA, 32 字节 - 区块的收据树根
+- miner: DATA, 20 字节 - 获得挖矿奖励的受益人地址
+- difficulty: QUANTITY - 该区块的难度整数值
+- totalDifficulty: QUANTITY - 截至该区块的链总难度整数值
+- extraData: DATA - 该区块的"额外数据"字段
+- size: QUANTITY - 该区块大小的整数值（以字节为单位）
+- gasLimit: QUANTITY - 该区块允许的最大 gas 值
+- gasUsed: QUANTITY - 该区块中所有交易使用的总 gas 值
+- timestamp: QUANTITY - 区块打包时的 unix 时间戳
+- transactions: Array - 交易对象数组，或根据最后给定参数返回 32 字节的交易哈希值数组
+- uncles: Array - 叔块哈希值数组
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params":["0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331", true],"id":1}'
 
-// Result
+// 结果
 {
 "id":1,
 "jsonrpc":"2.0",
@@ -697,13 +701,13 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params":["0
 
 ### eth_getBlockByNumber
 
-Returns information about a block by block number.
+通过区块号返回关于区块的信息。
 
-#### Parameters
-- QUANTITY|TAG - integer of a block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
-- Boolean - If true it returns the full transaction objects, if false only the hashes of the transactions.
+#### 参数
+- QUANTITY|TAG - 区块号整数，或字符串 "earliest"、"latest" 或 "pending"，作为默认区块参数
+- Boolean - 如果为 true 则返回完整的交易对象，如果为 false 则只返回交易的哈希值
 
-Example:
+示例：
 ```json
 params: [
    '0x1b4', // 436
@@ -711,48 +715,48 @@ params: [
 ]
 ```
 
-#### Returns
-See eth_getBlockByHash
+#### 返回值
+参见 eth_getBlockByHash
 
-#### Example
+#### 示例
 ```json
-// Request
+// 请求
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x1b4", true],"id":1}'
 
-// Result
-See eth_getBlockByHash
+// 结果
+参见 eth_getBlockByHash
 ```
 
 ### eth_getTransactionByHash
 
-Returns the information about a transaction requested by transaction hash.
+通过交易哈希返回关于交易的信息。
 
-#### Parameters
-DATA, 32 Bytes - hash of a transaction
+#### 参数
+DATA, 32 字节 - 交易的哈希值
 
-Example:
+示例：
 ```json
 params: [
    "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"
 ]
 ```
 
-#### Returns
-Object - A transaction object, or null when no transaction was found:
+#### 返回值
+Object - 交易对象，如果未找到交易则返回 null：
 
-- hash: DATA, 32 Bytes - hash of the transaction.
-- nonce: QUANTITY - the number of transactions made by the sender prior to this one.
-- blockHash: DATA, 32 Bytes - hash of the block where this transaction was in. null when its pending.
-- blockNumber: QUANTITY - block number where this transaction was in. null when its pending.
-- transactionIndex: QUANTITY - integer of the transactions index position in the block. null when its pending.
-- from: DATA, 20 Bytes - address of the sender.
-- to: DATA, 20 Bytes - address of the receiver. null when its a contract creation transaction.
-- value: QUANTITY - value transferred in Wei.
-- gasPrice: QUANTITY - gas price provided by the sender in Wei.
+- hash: DATA, 32 字节 - 交易的哈希值
+- nonce: QUANTITY - 发送方在此之前进行的交易数量
+- blockHash: DATA, 32 字节 - 该交易所在区块的哈希值。当其为待处理时为 null
+- blockNumber: QUANTITY - 该交易所在的区块号。当其为待处理时为 null
+- transactionIndex: QUANTITY - 交易在区块中的索引位置的整数值。当其为待处理时为 null
+- from: DATA, 20 字节 - 发送方地址
+- to: DATA, 20 字节 - 接收方地址。当其为合约创建交易时为 null
+- value: QUANTITY - 以 Wei 为单位转移的值
 - gas: QUANTITY - gas provided by the sender.
+- gasPrice: QUANTITY - gas price provided by the sender in Wei.
 - input: DATA - the data send along with the transaction.
 
-#### Example
+#### 示例
 ```json
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],"id":1}'
@@ -779,13 +783,13 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","param
 
 ### eth_getTransactionByBlockHashAndIndex
 
-Returns information about a transaction by block hash and transaction index position.
+通过区块哈希和交易索引位置返回关于交易的信息。
 
-#### Parameters
-- DATA, 32 Bytes - hash of a block.
-- QUANTITY - integer of the transaction index position.
+#### 参数
+- DATA, 32 字节 - 区块的哈希值
+- QUANTITY - 交易索引位置的整数值
 
-Example:
+示例：
 ```json
 params: [
    '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331',
@@ -793,54 +797,54 @@ params: [
 ]
 ```
 
-#### Returns
-See eth_getTransactionByHash
+#### 返回值
+参见 eth_getTransactionByHash
 
-#### Example
+#### 示例
 ```json
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockHashAndIndex","params":["0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b", "0x0"],"id":1}'
 
 // Result
-See eth_getTransactionByHash
+参见 eth_getTransactionByHash
 ```
 
 ### eth_getTransactionReceipt
 
-Returns the receipt of a transaction by transaction hash.
+通过交易哈希返回交易的收据。
 
-> Note That the receipt is not available for pending transactions.
+> 注意：收据不可用于待处理交易。
 
-#### Parameters
-DATA, 32 Bytes - hash of a transaction
+#### 参数
+DATA, 32 字节 - 交易的哈希值
 
-Example:
+示例：
 ```json
 params: [
    '0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238'
 ]
 ```
 
-#### Returns
-Object - A transaction receipt object, or null when no receipt was found:
+#### 返回值
+Object - 交易收据对象，如果未找到收据则返回 null：
 
-- transactionHash: DATA, 32 Bytes - hash of the transaction.
-- transactionIndex: QUANTITY - integer of the transactions index position in the block.
-- blockHash: DATA, 32 Bytes - hash of the block where this transaction was in.
-- blockNumber: QUANTITY - block number where this transaction was in.
-- from: DATA, 20 Bytes - address of the sender.
-- to: DATA, 20 Bytes - address of the receiver. null when its a contract creation transaction.
-- cumulativeGasUsed: QUANTITY - The total amount of gas used when this transaction was executed in the block.
-- gasUsed: QUANTITY - The amount of gas used by this specific transaction alone.
-- contractAddress: DATA, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise null.
-- logs: Array - Array of log objects, which this transaction generated.
-- logsBloom: DATA, 256 Bytes - Bloom filter for light clients to quickly retrieve related logs.
+- transactionHash: DATA, 32 字节 - 交易的哈希值
+- transactionIndex: QUANTITY - 交易在区块中的索引位置的整数值
+- blockHash: DATA, 32 字节 - 该交易所在区块的哈希值
+- blockNumber: QUANTITY - 该交易所在的区块号
+- from: DATA, 20 字节 - 发送方地址
+- to: DATA, 20 字节 - 接收方地址。当其为合约创建交易时为 null
+- cumulativeGasUsed: QUANTITY - 该交易在区块中执行时使用的总 gas 量
+- gasUsed: QUANTITY - 该特定交易单独使用的 gas 量
+- contractAddress: DATA, 20 字节 - 如果交易为合约创建交易，则为创建的合约地址，否则为 null
+- logs: Array - 该交易生成的日志对象数组
+- logsBloom: DATA, 256 字节 - 轻客户端快速检索相关日志的布隆过滤器
 
-It also returns either:
-- root: DATA 32 bytes of post-transaction stateroot (pre Byzantium)
-- status: QUANTITY either 1 (success) or 0 (failure)
+它还返回：
+- root: DATA 32 字节，交易后状态根（pre Byzantium）
+- status: QUANTITY 1（成功）或 0（失败）
 
-#### Example
+#### 示例
 ```json
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],"id":1}'
@@ -856,11 +860,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","para
      blockHash: '0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b',
      cumulativeGasUsed: '0x33bc', // 13244
      gasUsed: '0x4dc', // 1244
-     contractAddress: '0xb60e8dd61c5d32be8058bb8eb970870f07233155', // or null, if none was created
+     contractAddress: '0xb60e8dd61c5d32be8058bb8eb970870f07233155', // 如果没有创建合约则为 null
      logs: [{
-         // logs as returned by getFilterLogs, etc.
+         // 日志，与 getFilterLogs 等返回的格式相同
      }, ...],
-     logsBloom: "0x00...0", // 256 byte bloom filter
+     logsBloom: "0x00...0", // 256 字节布隆过滤器
      status: '0x1'
   }
 }

@@ -1,28 +1,28 @@
-# API Reference Document
+# API 参考文档
 
-> Important Note:
-> - All interface request parameters for constructing transactions must set a transaction fee greater than 0NANOGT
-> - The asset amount (Asset amount) is a positive integer value converted by multiplying 10E18
-> - The asset amount supports scientific notation, for example 10E9 NANOGT = 1GT
+> 重要提示：
+> - 构建交易的所有接口请求参数必须设置大于0NANOGT的交易费
+> - 资产金额（资产数量）是通过将10E18乘以转换的正整数值
+> - 资产金额支持科学计数法，例如10E9 NANOGT = 1GT
 
-## Node API
+## 节点 API
 
-### 1. Query A Node Status
+### 1. 查询节点状态
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/status
 ```
 
-**Return Parameters**
+**返回参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| node_status | Object | Node status information |
-| application_version | Object | Application version information |
+| node_status | Object | 节点状态信息 |
+| application_version | Object | 应用版本信息 |
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -54,21 +54,21 @@ GET /v1/status
 }
 ```
 
-### 2. Query Account Information
+### 2. 查询账户信息
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/account/{address}
 ```
 
-**Parameter Explanation**
+**参数说明**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| address | String | Account address |
+| address | String | 账户地址 |
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -115,22 +115,21 @@ GET /v1/account/{address}
 }
 ```
 
+### 3. 查询账户余额
 
-### 3. Query Account Balance
-
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/account/balance/{account}
 ```
 
-**Parameter Explanation**
+**参数说明**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| address | String | Account address |
+| address | String | 账户地址 |
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -144,17 +143,17 @@ GET /v1/account/balance/{account}
 }
 ```
 
-### 4. Publish Multisignature Account 
+### 4. 发布多签账户
 
-> This interfaces generates the transaction body of "publishing a multisignature account". After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting。
+> 该接口生成"发布多签账户"的交易体,本地签名后,调用"发送交易"接口完成广播。
 
-**Interface Path**
+**接口路径**
 
 ```bash
 POST /v1/account/publish-multisig/{address}
 ```
 
-**Request Body Example**
+**请求体示例**
 
 ```json
 {
@@ -179,7 +178,7 @@ POST /v1/account/publish-multisig/{address}
 }
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -214,15 +213,15 @@ POST /v1/account/publish-multisig/{address}
 }
 ```
 
-### 5. Query Consensus Accounts List
+### 5. 查询共识账户列表
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/staking/con-accounts
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -256,25 +255,25 @@ GET /v1/staking/con-accounts
 }
 ```
 
-### 6. Create a Vault Account
+### 6. 创建保险账户
 
-> This interfaces generates the transaction body of "publishing a multisignature account". After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting。
+> 该接口生成"发布多签账户"的交易体,本地签名后,调用"发送交易"接口完成广播。
 
 
-**Interface Path**
+**接口路径**
 
 ```bash
 POST  /v1/vault-account/create/{base-account}
 ```
 
-**Parameter Explanation**
+**参数说明**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| base-account | String | Base account address |
+| base-account | String | 基础账户地址 |
 
 
-**Request Body Example**
+**请求体示例**
 
 ```json
 {
@@ -310,7 +309,7 @@ POST  /v1/vault-account/create/{base-account}
 }
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -354,19 +353,19 @@ POST  /v1/vault-account/create/{base-account}
 }
 ```
 
-### 7. Change Clearing Height
+### 7. 修改清算高度
 
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
+> 该接口生成"修改清算高度"的交易体,本地签名后,调用"发送交易"接口完成广播。
 
 
-**Interface Path**
+**接口路径**
 
 ```bash
 POST /v1/vault-account/update-clearing-height
 ```
 
 
-**Request Body Example**
+**请求体示例**
 
 ```json
 {
@@ -391,7 +390,7 @@ POST /v1/vault-account/update-clearing-height
 }
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -425,19 +424,19 @@ POST /v1/vault-account/update-clearing-height
 }
 ```
 
-### 8. Clear Account Transaction
+### 8. 清空账户交易
 
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
+> 该接口生成"修改清算高度"的交易体,本地签名后,调用"发送交易"接口完成广播。
 
 
-**Interface Path**
+**接口路径**
 
 ```bash
 POST /v1/vault-account/clear
 ```
 
 
-**Request Body Example**
+**请求体示例**
 
 ```json
 {
@@ -462,7 +461,7 @@ POST /v1/vault-account/clear
 }
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -498,22 +497,22 @@ POST /v1/vault-account/clear
 }
 ```
 
-### 9. Query Vault Account Information
+### 9. 查询保险账户信息
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET  /v1/vault-account/{address}
 ```
 
-**Parameter Explanation**
+**参数说明**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| address | String |Vault Account |
+| address | String |保险账户 |
 
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -526,7 +525,7 @@ GET  /v1/vault-account/{address}
                 "value": {
                     "base_account": {
                         "account_number": "12",
-                        "address": "vault112t7hfsmd63a2nz0vwqhpy3msd98vvl35qeuej2uavh2ssjls4f8amqtwgpq3pwksgdqfe6", //Vault Account
+                        "address": "vault112t7hfsmd63a2nz0vwqhpy3msd98vvl35qeuej2uavh2ssjls4f8amqtwgpq3pwksgdqfe6", //保险账户
                         "public_key": {
                             "type": "gatechain/PubKeyEd25519",
                             "value": "IK8RZV4tqj/m/s9eEY9agWXF42yA5U3s31Q0D6Zp1rI="
@@ -549,7 +548,7 @@ GET  /v1/vault-account/{address}
                     "received_revocable_tokens": null, //token that can be revoked
                     "security_address": "gt116h05fjhaay7sx3zl9w5ej3tpx3s94yhcsmt0gqcqsq26w2qvsyt4l82vftygtff0pfsr93", //Retrieval Account
                     "sent_revocable_tokens": [], //token sent and revocable
-                    "vault_address": null //Vault Account 
+                    "vault_address": null //保险账户 
                 }
             },
             "account_type": 1 //account type：0.ingle signature Standard Account,1.single signature Vault Account,2.multisignature Standard Account,3.multisignature Vault Account 
@@ -558,22 +557,22 @@ GET  /v1/vault-account/{address}
 }
 ```
 
-### 10. Query Revocable Transaction List From A Vault Account 
+### 10. 查询可撤回交易列表从保险账户
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET  /v1/vault-account/list-revocable-txs/{vault-account}
 ```
 
-**Parameter Explanation**
+**参数说明**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| vault-account | String |Vault Account |
+| vault-account | String |保险账户 |
 
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -596,15 +595,15 @@ GET  /v1/vault-account/list-revocable-txs/{vault-account}
 
 
 
-### 11. Query The Latest Block Information
+### 11. 查询最新区块信息
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/block/latest
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -642,21 +641,21 @@ GET /v1/block/latest
 }
 ```
 
-### 12. Query A Specific BLock Information
+### 12. 查询特定区块信息
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/block/{height}
 ```
 
-**Parameter Explanation**
+**参数说明**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
 | height | Int64 | block height(>=1) |
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -694,18 +693,18 @@ GET /v1/block/{height}
 }
 ```
 
-### 13. Send Transaction
+### 13. 发送交易
 
-**Interface Path**
+**接口路径**
 
 ```bash
 POST /v1/tx
 ```
 
-**Request Body Example**
+**请求体示例**
 
 ```json
-After locally singing a transaction,  you just need to copy the signatures file as request body. No need to copy below content.
+在本地签名交易后，只需要将签名文件作为请求体复制。无需复制以下内容。
 {
     "type":"StdTx",
     "value":{
@@ -757,7 +756,7 @@ After locally singing a transaction,  you just need to copy the signatures file 
     }
 }
 ```
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -814,23 +813,23 @@ After locally singing a transaction,  you just need to copy the signatures file 
 }
 ```
 
-### 14. Normal Transaction
+### 14. 普通交易
 
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/tx/send/{address}
 ```
 
-**Parameter Explanation**
+**参数说明**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| address | String | Account address |
+| address | String | 账户地址 |
 
 
-**Request Body Example**
+**请求体示例**
 
 ```json
 {
@@ -856,7 +855,7 @@ GET /v1/tx/send/{address}
 }
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -896,21 +895,21 @@ GET /v1/tx/send/{address}
 }
 ```
 
-### 15. Query Transaction
+### 15. 查询交易
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/tx/{hash}
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| hash | String | Transaction hash |
+| hash | String | 交易哈希 |
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -1041,23 +1040,23 @@ GET /v1/tx/{hash}
 }
 ```
 
-### 16. Send a Revocable Transaction
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
+### 16. 发送可撤回交易
+> 该接口生成"更改清算高度"的交易体。签名后，可以调用"发送交易"接口完成广播。
 
-**Interface Path**
+**接口路径**
 
 ```bash
 POST  /v1/revocable-tx/send/{address}
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
 | address | String | the recipient account, which can be a Standard Account or a Vault Account. |
 
 
-**Request Body Example**
+**请求体示例**
 
 ```json
 {
@@ -1087,7 +1086,7 @@ POST  /v1/revocable-tx/send/{address}
 }
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -1127,23 +1126,23 @@ POST  /v1/revocable-tx/send/{address}
 }
 ```
 
-### 17. Revoke a Revocable Transaction
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
+### 17. 撤回可撤回交易
+> 该接口生成"更改清算高度"的交易体。签名后，可以调用"发送交易"接口完成广播。
 
 
-**Interface Path**
+**接口路径**
 
 ```bash
 POST /v1/revocable-tx/revoke/{tx-hash}
 ```
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| tx-hash | String | Hash of the revocable transaction |
+| tx-hash | String | 可撤回交易哈希 |
 
-**Request Body Example**
+**请求体示例**
 
 ```json
 {
@@ -1168,7 +1167,7 @@ POST /v1/revocable-tx/revoke/{tx-hash}
 }
 ```
 
-**Return Example**
+**返回示例**
 
 ```json
 {
@@ -1212,1858 +1211,27 @@ POST /v1/revocable-tx/revoke/{tx-hash}
 }
 ```
 
-### 18. Query Revocable Transaction Status
+### 18. 查询可撤回交易状态
 
-**Interface Path**
+**接口路径**
 
 ```bash
 GET /v1/revocable-tx/status/{hash}
 ```
 
 
-**Parameters**
+**参数**
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |------|------|------|
-| tx-hash | String | transaction Hash of the Revocable Transaction |
+| tx-hash | String | 可撤回交易哈希 |
 
 
-**Return Example**
+**返回示例**
 
 ```json
 {
     "status": 1, //1：revocable,0：irrevocable
     "revoke_hash": "" //transaction Hash of the Revoke transaction
-}
-```
-
-### 19. Issue Token 
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST  /v1/token/issue/{symbol}
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| symbol | String | token symbol, (upper case letter, 2-15 characters long)|
-
-> Note：Token issuance incurs a fee of 200000000000NANOGT, please make sure you have adequate NANOGT token at account.
->
-**Request Body Example**
-
-```json
-{
-  "base_req": {
-    "from": "gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-    "memo": "", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-    "chain_id": "testnet", //chain ID
-    "gas": "80445444", //gas consumed by the transaction
-    "fees": [
-      {
-        "denom": "NANOGT", //unit
-        "amount": "5000" //fee
-      }
-    ],
-    "simulate": false, //if calculate simulated gas
-    "valid_height":[ //block height at which  the transaction takes effect
-         "600",
-         "900"
-    ]
-  },
-  "token_name": "test token", //token name
-  "total_supply": "1000000000000000", //total supply
-  "mintable": true, //if allows additionally issuing
-  "freezable": true //if allows freezing
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type":"StdTx",
-    "value":{
-        "msg":[
-            {
-                "type":"IssueToken", //transaction type
-                "value":{
-                    "source_address":"gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-                    "token_name":"test token", //token name
-                    "symbol":"YJ", //token symbol
-                    "total_supply":"1000000000000000", //total supply
-                    "mintable":true, //if allows additionally issuing
-                    "freezable":true //if allows freezing
-                }
-            }
-        ],
-        "fee":{
-            "amount":[
-                {
-                    "denom":"NANOGT", //unit
-                    "amount":"5000" //fee
-                }
-            ],
-            "gas":"80445444" //gas consumed by the transaction
-        },
-        "signatures":null, //signature
-        "memo":"",
-    	 "valid_height":[ //block height at which  the transaction takes effect
-            "600",
-            "900"
-        ]
-    }
-}
-```
-
-
-### 20. Issue Additional Token
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/token/mint/{symbol}
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| symbol | String | onchain token symbol (token symbol-[random string])|
-
-
-**Request Body Example**
-
-```json
-{
-  "base_req": {
-	"from": "gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-	"memo": "", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-	"chain_id": "testnet", //chain ID
-	"gas": "200000", //gas consumed by the transaction
-	"fees": [
-	  {
-		"denom": "NANOGT", //unit
-		"amount": "5000" //fee
-	  }
-	],
-	"simulate": false, //if calculate simulated gas
-   "valid_height":[ //block height at which  the transaction takes effect
-   		"600",
-   		"900"
-   ] 
-  },
-  "amount": "10000000" //amount to additionally issue
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type":"StdTx",
-    "value":{
-        "msg":[
-            {
-                "type":"MintToken", //transaction type
-                "value":{
-                  "source_address":"gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-                    "amount":{
-                        "denom":"YJ-9D3", //unit of additionally issued token
-                        "amount":"10000000" //amount to additionally issue
-                    }
-                }
-            }
-        ],
-        "fee":{
-            "amount":[
-                {
-                    "denom":"NANOGT", //unit
-                    "amount":"5000" //fee
-                }
-            ],
-            "gas":"200000" //gas consumed by the transaction
-        },
-        "signatures":null, //signature
-        "memo":"",
-  		 "valid_height":[ //block height at which  the transaction takes effect
-   			 "600",
-   			 "900"
- 		 ] 
-    }
-}
-```
-
-
-### 21. Freeze Token
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/token/freeze/{symbol}
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| symbol | String | onchain token symbol (token symbol-[random string])|
-
-
-**Request Body Example**
-
-```json
-{
-    "from": "gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-    "memo": "", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-    "chain_id": "testnet", //chain ID
-    "gas": "200000", //gas consumed by the transaction
-    "fees": [
-      {
-        "denom": "NANOGT", //unit
-        "amount": "5000" //fee
-      }
-    ],
-    "simulate": false, //if calculate simulated gas
-    "valid_height":[ //block height at which  the transaction takes effect
-        "600",
-        "900"
-    ]
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type":"StdTx",
-    "value":{
-        "msg":[
-            {
-                "type":"FreezeToken", //transaction type
-                "value":{
-                  "source_address":"gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-                    "symbol":"YY-A69" //unit of token to freeze
-                }
-            }
-        ],
-        "fee":{
-            "amount":[
-                { 
-                    "denom":"NANOGT", //unit
-                    "amount":"5000" //fee
-                }
-            ],
-            "gas":"200000" //gas consumed by the transaction
-        },
-        "signatures":null, //signature
-        "memo":"", 
-        "valid_height":[ //block height at which  the transaction takes effect
-           "600",
-           "900"
-        ]
-    }
-}
-```
-
-### 22. Unfreeze Token
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/token/unfreeze/{symbol}
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| symbol | String | onchain token symbol (token symbol-[random string])|
-
-
-**Request Body Example**
-
-```json
-{
-    "from": "gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-    "memo": "",  ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-    "chain_id": "testnet", //chain ID
-    "gas": "200000", //gas consumed by the transaction
-    "fees": [
-      {
-        "denom": "NANOGT", //unit
-        "amount": "5000" //fee
-      }
-    ],
-    "simulate": false, //if calculate simulated gas
-    "valid_height":[ //block height at which  the transaction takes effect
-         "600",
-         "900"
-    ]
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type":"StdTx",
-    "value":{
-        "msg":[
-            {
-                "type":"UnfreezeToken", //transaction type
-                "value":{
-                  "source_address":"gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-                    "symbol":"YY-A69" //unit of token to unfreeze
-                }
-            }
-        ],
-        "fee":{
-            "amount":[
-                {
-                    "denom":"NANOGT", //unit
-                    "amount":"5000" //fee
-                }
-            ],
-            "gas":"200000" //gas consumed by the transaction
-        },
-        "signatures":null, //signature
-        "memo":"",
-        "valid_height":[ //block height at which  the transaction takes effect
-           "600",
-           "900"
-        ]
-    }
-}
-```
-
-### 23. Burn Token 
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/token/burn/{symbol}
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| symbol | String | onchain token symbol (token symbol-[random string])|
-
-
-**Request Body Example**
-
-```json
-{
-    "base_req": {
-        "from": "gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-        "memo": "", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id": "testnet", //chain ID
-        "gas": "200000", //gas consumed by the transaction
-        "fees": [{
-            "denom": "NANOGT", //unit
-            "amount": "5000" //fee
-        }],
-        "simulate": false, //if calculate simulated gas
-        "valid_height":[ //block height at which  the transaction takes effect
-           "600",
-           "900"
-        ]
-    },
-    "amount": "10000" //token amount to burn
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type":"StdTx",
-    "value":{
-        "msg":[
-            {
-                "type":"BurnToken", //transaction type
-                "value":{
-                    "from_address":"gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //sender account
-                    "sub":{
-                        "denom":"YY-A69", //unit of token to burn
-                        "amount":"10000" //burned token amount 
-                    }
-                }
-            }
-        ],
-        "fee":{
-            "amount":[
-                {
-                    "denom":"NANOGT", //unit
-                    "amount":"5000" //fee
-                }
-            ],
-            "gas":"200000" //gas consumed by the transaction
-        },
-        "signatures":null, //signature
-        "memo":"",
-        "valid_height":[ //block height at which  the transaction takes effect
-           "600",
-           "900"
-        ]
-    }
-}
-```
-
-### 24. Query Token Information 
-
-**Interface Path**
-
-```bash
-GET  /v1/token/show/{symbol}
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| symbol | String | onchain token symbol (token symbol-[random string])|
-
-
-**Return Example**
-
-```json
-{
-    "height":"0", //block height
-    "result":{
-        "type":"Token", //token type
-        "value":{
-            "freezable":true, //if allows freezing
-            "freezed":false, //if freeze
-            "mintable":true, //if allows additionally issuing
-            "source_address":"gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //Issuer account address
-            "symbol":"YJ-9D3", //onchain token symbol
-            "token_name":"test token", //token name
-            "total_supply":"1000000000000000" //total supply
-        }
-    }
-}
-```
-
-### 25. Query All Token
-
-**Interface Path**
-
-```bash
-GET  /v1/token/list
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| symbol | String | onchain token symbol (token symbol-[random string])|
-
-
-**Return Example**
-
-```json
-{
-    "height":"0",
-    "result":{
-        "tokens":[
-            {
-                "type":"Token", //token type
-                "value":{
-                    "freezable":true, //if allows freezing
-                    "freezed":false, //if freeze
-                    "mintable":true, //if allows additionally issuing
-                  "source_address":"gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //Issuer account address
-                    "symbol":"YJ-9D3", //onchain token symbol
-                    "token_name":"test token", //token name
-                    "total_supply":"1000000000000000" //total supply
-                }
-            },
-            ...
-        ]
-    }
-}
-```
-
-
-### 26. Query Foundation Member List
-
-**Interface Path**
-
-```bash
-GET  v1/foundation/members
-```
-
-**Return Example**
-
-```json
-{
-    "height": "0", //block height
-    "result": [
-        {
-            "address": "gt11tgjslrwl0j35czlj0ayxq9t7hzd0gtckfwc57qsl3nftl7zyk8gccv5kexetmm3xsv2tj5", //foundation member account
-            "funds_pool": [
-                {
-                    "amount": "10000000000000000", //total token quantity
-                    "denom": "NANOGT" //unit
-                }
-            ],
-            "proportion": "1", //the  proportion held by the foundation member
-            "released": [
-                {
-                    "amount": "4666666666.660000000000000000", //token already released
-                    "denom": "NANOGT" //unit
-                }
-            ],
-            "withdraw": [] //revoked token amount
-        }
-    ]
-}
-```
-
-### 27. Query Foundation Member Information
-
-**Interface Path**
-
-```bash
-GET  /v1/foundation/member/{address}
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| address | String | foundation member account address|
-
-**Return Example**
-
-```json
-{
-    "height": "0", //block height
-    "result": {
-        "type": "Member",
-        "value": {
-            "address": "gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9eatyla3hkaevg3vx99mlslwsnfq", //foundation member account
-            "funds_pool": [
-                {
-                    "amount": "10000000000000000",//total token quantity
-                    "denom": "NANOGT" //unit
-                }
-            ],
-            "proportion": "1", //the  proportion held by the foundation member
-            "released": [
-                {
-                    "amount": "11333333333.330000000000000000", //token already released
-                    "denom": "NANOGT" //unit
-                }
-            ],
-            "withdraw": [] //revoked token amount
-        }
-    }
-}
-```
-
-### 28. Delegate Token To Consensus Account
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/staking/delegator/{delegatorAddr}/delegate
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-
-
-**Request Body Example**
-
-```json
-{
-    "base_req":{
-        "from":"gt110hwwuh7chle04dk38ut7l0uz8estmnsl78kmdqppnhrvvyrps92lzqh5q52ny4ztv5gaq9", //sender account
-        "memo":"", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id":"testnet", //chain ID
-        "gas":"200000", //gas consumed by the transaction
-        "fees":[
-            {
-                "denom":"NANOGT", //unit
-                "amount":"500" //fee
-            }
-        ],
-        "simulate":false, //if calculate simulated gas
-        "valid_height":[ //the block height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    },
-    "con-account_address":"gt116h05fjhaay7sx3zl9w5ej3tpx3s94yhcsmt0gqcqsq26w2qvsyt4l82vftygtff0pfsr93", //consensus account address
-    "delegator_address":"gt110hwwuh7chle04dk38ut7l0uz8estmnsl78kmdqppnhrvvyrps92lzqh5q52ny4ztv5gaq9", //delegator's account address
-    "amount":{
-        "denom":"NANOGT", //unit
-        "amount":"100000000" //delegation token amount 
-    }
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type":"StdTx",
-    "value":{
-        "msg":[
-            {
-                "type":"MsgDelegate", //transaction type
-                "value":{
-                    "delegator_address":"gt110hwwuh7chle04dk38ut7l0uz8estmnsl78kmdqppnhrvvyrps92lzqh5q52ny4ztv5gaq9", //delegator's account address
-                    "con-account_address":"gt116h05fjhaay7sx3zl9w5ej3tpx3s94yhcsmt0gqcqsq26w2qvsyt4l82vftygtff0pfsr93", //consensus account address
-                    "amount":{
-                        "denom":"NANOGT",  //unit
-                        "amount":"100000000" //delegation token amount 
-                    }
-                }
-            }
-        ],
-        "fee":{
-            "amount":[
-                {
-                    "denom":"NANOGT", //unit
-                    "amount":"500" //fee
-                }
-            ],
-            "gas":"200000" //gas consumed by the transaction
-        },
-        "nonces":[
-            null
-        ],
-        "signatures":null, //signature
-        "memo":"",
-        "valid_height":[ //the block height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-### 29. Query Delegation Information of A Delegator Account In A Consensus Account 
-
-**Interface Path**
-
-```bash
-GET  /v1/staking/delegator/{delegatorAddr}/{con-account}/delegations
-
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String | delegator’s account|
-| con-account | String | consensus account|
-
-**Return Example**
-
-```json
-{
-    "height": "103", //block height
-    "result": {
-        "balance": "1000000000", //delegation token amount 
-        "con-account_address": "gt11ja8j8qskxvccwf3rchp9efxjdu6v5wfkj5uwu4cmktue7h7ufjwqlgqs9ja64xj9kgd5zj", //consensus account address
-        "delegator_address": "gt11923wtfrfea85w9pklkkmpff7ctllhyjfyed54amdnmtteerk4jrl0tl58khd300jvgnsma", //delegator's account address
-        "shares": "1000000000.000000000000000000" //delegation amount
-    }
-}
-```
-
-### 30. Query Delegation Information of A Delegator Account In All Consensus Accounts
-
-**Interface Path**
-
-```bash
-GET  /v1/staking/delegator/{delegatorAddr}/delegations
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String | delegator’s account|
-
-**Return Example**
-
-```json
-{
-    "height": "117", //block height
-    "result": [
-        {
-            "balance": "200000", //delegation token amount 
-            "con-account_address": "gt11fd299ajlray3ltuj0jmzvwylzafscymk9nc98trr5peedf9q3s90wnczpa7qr6f5d6y3ny", //consensus account address
-            "delegator_address": "gt11923wtfrfea85w9pklkkmpff7ctllhyjfyed54amdnmtteerk4jrl0tl58khd300jvgnsma", //delegator's account address
-            "shares": "200000.000000000000000000" //delegation amount
-        },
-		...
-    ]
-}
-```
-
-### 31. Query Consensus Accounts Information For All Delegations of An Account
-
-**Interface Path**
-
-```bash
-GET /v1/staking/delegator/{delegatorAddr}/con-accounts
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String | delegator’s account|
-
-**Return Example**
-
-```json
-{
-    "height":"77842",//block height
-    "result":[
-        {
-            "commission":{
-                "commission_rates":{
-                    "max_change_rate":"0.010000000000000000",//fee maximum change  range
-                    "max_rate":"0.010000000000000000",//maximum fee
-                    "rate":"0.010000000000000000" //fee
-            },
-                "update_time":"2020-05-27T08:13:47Z"// fee updated at
-            },
-            "delegator_shares":"100000000.000000000000000000",//delegation amount of a consensus account 
-            "description":{//consensus account attributes collection
-                "details":"",
-                "identity":"",
-                "moniker":"contwo",
-                "website":""
-            },
-            "operator_address":
-"gt11h3ugxuhhljffqyvj7sm08u3507ykdr5w67d9dkuv5tktv2vyc5xqrsxv7ujd8r6xvpwpt7",//consensus account address
-			  "power": "39000934", //consensus account power
-            "power_rate":"1.029615402961540000",//consensus account loyalty coefficient
-            "pubkey": "gt1pub1u8s6p73qzlye3d4mljgt3auxhz4shj43w2eu0evladd03rr2auyrhc87aynqpwdz6w", //consensus account public key
-            "status":"online", //consensus account online status
-            "tokens":"100000000"//total token amount delegated to the consensus account
-        }
-    ]
-}
-```
-
-
-### 32. Query A List of Delegation Transactions of A Delegator Account
-
-**Interface Path**
-
-```bash
-GET  /v1/tx?message.sender={delegatorAddr}&limit=1&page=1&message.action={delegation/redelegation/undelegation}
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String | delegator’s account|
-| action | String | action type:delegate/shift delegation/undelegate|
-**Return Example**
-
-```json
-[
-    {
-        "count": "1", //Query entries
-        "limit": "100", //entries per page
-        "page_number": "1", // page number
-        "page_total": "1", //total pages
-        "total_count": "1", //total entries
-        "txs": [
-            {
-                "data": "A802B9CDCFED0A6BB9AE6FBE0A280273979685CF46967B3CEF04E3FDE9FC89B748D1AEF505630C95F81C50AD416399F657E2571C828F1228817243C326F338B53826CC93443332C45EFB00C1E81311FAD6B5A1AECF0E7CA43762221BB9FC03FD1A110A064E414E4F475412073130303030303012120A0C0A064E414E4F47541202313110C09A0C1A30E3F427451551B57618A238092EF6B7CFF333D55AC23A7F07D58AE9845E2E49A65B019F71D4F393B29DAFB4E8E605E40922690A25E1E1A0FA20C939025C7A4DF13E0525E30C425B4A89A4DDBC38B1373B00C5F4D6CCEC77F27B1240F8369BB605D0DD32277F9370EF9FC7D0028D50E62CD7892594C6C1E0689551D9B8A4765F244528C436796F3300A5FDEC7817DE5A286C78EB485C4EAB9D259B0C3204CD209F22",
-                "events": [
-                    {
-                        "attributes": [
-                            {
-                                "key": "con-account",
-                                "value": "gt11s9ey8sex7vut2wpxejf5gvejc300kqxpaqf3r7kkkks6ancw0jjrwc3zrwulcqlamjqzwd" //consensus account address
-                            },
-                            {
-                                "key": "amount",
-                                "value": "1000000" //delegation token amount 
-                            }
-                        ],
-                        "type": "delegate" //transaction type
-                    },
-                    {
-                        "attributes": [
-                            {
-                                "key": "module",
-                                "value": "staking"
-                            },
-                            {
-                                "key": "sender",
-                                "value": "gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x" //sender
-                            },
-                            {
-                                "key": "action",
-                                "value": "delegation"
-                            }
-                        ],
-                        "type": "message"
-                    }
-                ],
-                "gas_used": "107880",
-                "gas_wanted": "200000",
-                "height": "4185", //block height of the transaction
-                "logs": [
-                    {
-                        "events": [
-                            {
-                                "attributes": [
-                                    {
-                                        "key": "con-account",
-                                        "value": "gt11s9ey8sex7vut2wpxejf5gvejc300kqxpaqf3r7kkkks6ancw0jjrwc3zrwulcqlamjqzwd" //consensus account address
-                                    },
-                                    {
-                                        "key": "amount",
-                                        "value": "1000000"
-                                    }
-                                ],
-                                "type": "delegation"
-                            },
-                            {
-                                "attributes": [
-                                    {
-                                        "key": "module",
-                                        "value": "staking"
-                                    },
-                                    {
-                                        "key": "sender",
-                                        "value": "gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x" //sender
-                                    },
-                                    {
-                                        "key": "action",
-                                        "value": "delegation"
-                                    }
-                                ],
-                                "type": "message"
-                            }
-                        ],
-                        "log": "",
-                        "msg_index": 0,
-                        "success": true
-                    }
-                ],
-                "raw_log": "[{\"msg_index\":0,\"success\":true,\"log\":\"\",\"events\":[{\"type\":\"delegate\",\"attributes\":[{\"key\":\"con-account\",\"value\":\"gt11s9ey8sex7vut2wpxejf5gvejc300kqxpaqf3r7kkkks6ancw0jjrwc3zrwulcqlamjqzwd\"},{\"key\":\"amount\",\"value\":\"1000000\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"module\",\"value\":\"staking\"},{\"key\":\"sender\",\"value\":\"gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x\"},{\"key\":\"action\",\"value\":\"delegate\"}]}]}]",
-                "timestamp": "2020-06-06T03:28:28+08:00",
-                "tx": {
-                    "type": "StdTx",
-                    "value": {
-                        "fee": {
-                            "amount": [
-                                {
-                                    "amount": "11", //transaction fee
-                                    "denom": "NANOGT"
-                                }
-                            ],
-                            "gas": "200000"
-                        },
-                        "memo": "",
-                        "msg": [
-                            {
-                                "type": "MsgDelegate",
-                                "value": {
-                                    "amount": {
-                                        "amount": "1000000", //delegation token amount
-                                        "denom": "NANOGT"
-                                    },
-                                    "delegator_address": "gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x", //delegator address
-                                    "con-account_address": "gt11s9ey8sex7vut2wpxejf5gvejc300kqxpaqf3r7kkkks6ancw0jjrwc3zrwulcqlamjqzwd" //consensus account address
-                                }
-                            }
-                        ],
-                        "nonces": [
-                            "4/QnRRVRtXYYojgJLva3z/Mz1VrCOn8H1YrphF4uSaZbAZ9x1POTsp2vtOjmBeQJ"
-                        ],
-                        "signatures": [
-                            {
-                                "pub_key": {
-                                    "type": "gatechain/PubKeyEd25519",
-                                    "value": "yTkCXHpN8T4FJeMMQltKiaTdvDixNzsAxfTWzOx38ns="
-                                },
-                                "signature": "+DabtgXQ3TInf5Nw75/H0AKNUOYs14kllMbB4GiVUdm4pHZfJEUoxDZ5bzMApf3seBfeWihseOtIXE6rnSWbDA==" //signature
-                            }
-                        ],
-                        "valid_height": [ 
-                            "4173",
-                            "4383" //the block height at which the transaction takes effect
-                        ]
-                    }
-                },
-                "txhash": "BASIC-57884EB3E55CD2BDA7E912D6B2851CB539A4C4ED40DFC164B0AF57E9A49D512883E353D38677EC051055A17A948415A7" //transaction hash
-            }
-        ]
-    }
-]
-```
-
-### 33. Shift Delegation
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/staking/delegator/{delegatorAddr}/redelegate
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-
-
-**Request Body Example**
-
-```json
-{
-    "base_req":{
-        "from":"gt110hwwuh7chle04dk38ut7l0uz8estmnsl78kmdqppnhrvvyrps92lzqh5q52ny4ztv5gaq9", //sender account
-        "memo":"", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id":"testnet", //chain ID
-        "gas":"200000", //gas consumed by the transaction
-        "fees":[
-            {
-                "denom":"NANOGT", //unit
-                "amount":"500" //fee
-            }
-        ],
-        "simulate":false, //if calculate simulated gas
-        "valid_height":[ //the block height at which transaction takes effect
-            "600",
-            "900"
-    	]
-    },
-    "con-account_src_address": "gt116h05fjhaay7sx3zl9w5ej3tpx3s94yhcsmt0gqcqsq26w2qvsyt4l82vftygtff0pfsr93", //source consensus account
-    "con-account_dst_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //target consensus account
-    "delegator_address":"gt110hwwuh7chle04dk38ut7l0uz8estmnsl78kmdqppnhrvvyrps92lzqh5q52ny4ztv5gaq9", //delegator  account
-    "amount":
-        {
-            "denom":"NANOGT", //unit
-            "amount":"100000000" //  token amount to shift 
-        }
-    
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type": "StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "MsgBeginRedelegate", //transaction type
-                "value": {
-                    "delegator_address": "gt110hwwuh7chle04dk38ut7l0uz8estmnsl78kmdqppnhrvvyrps92lzqh5q52ny4ztv5gaq9", //delegator  account
-                    "con-account_src_address": "gt116h05fjhaay7sx3zl9w5ej3tpx3s94yhcsmt0gqcqsq26w2qvsyt4l82vftygtff0pfsr93", //source consensus account
-                    "con-account_dst_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //target consensus account
-                    "amount": {
-                        "denom": "NANOGT", //unit
-                        "amount": "100000000" // token amount to shift
-                    }
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "NANOGT", //unit
-                    "amount": "500" //fee
-                }
-            ],
-            "gas": "200000"  //gas consumed by the transaction
-        },
-        "nonces": [
-            null
-        ],
-        "signatures": null, //signature
-        "memo": "",
-        "valid_height":[ //the block height at which transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-### 34. Query Delegation Shifts 
-
-
-**Interface Path**
-
-```bash
-GET /v1/staking/redelegations?delegator={delegatorAddr}&con-account_from={con-account_from}&con-account_to={con-account_to}
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-| con-account_from | String | source consensus account|
-| con-account_to | String | target consensus account|
-
-**Return Example**
-
-```json
-{
-    "height": "4573", //block height
-    "result": [
-        {
-            "delegator_address": "gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //delegator's account address
-            "con-account_dst_address": "gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //target consensus account
-            "con-account_src_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //source consensus account
-            "entries": [
-                {
-                    "balance": "40000000", // shift delegation token amount 
-                    "completion_time": "2020-06-26T19:18:28Z", //time the shift delegation finishes at
-                    "creation_height": 0, //block height at which the shift delegation transaction is initiated
-                    "initial_balance": "40000000", //initial token amount of shift delegation
-                    "shares_dst": "40000000.000000000000000000" //delegation amount shifted to target consensus account
-                }
-            ]
-        }
-    ]
-}
-```
-
-
-### 35. Undelegate From A Consensus Account
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST  /v1/staking/delegator/{delegatorAddr}/undelegate
-```
-
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-
-
-**Request Body Example**
-
-```json
-{
-    "base_req":{
-        "from":"gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //sender account
-        "memo":"", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id":"testnet", //chain ID
-        "gas":"200000", //gas consumed by the transaction
-        "fees":[
-            {
-                "denom":"NANOGT",
-                "amount":"500" //fee
-            }
-        ],
-        "simulate":false, //if calculate simulated gas
-        "valid_height":[ //the block height at which transaction takes effect
-            "600",
-            "900"
-    	]
-    },
-    "con-account_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //consensus account
-    "delegator_address":"gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //delegator  account
-    "amount":
-        {
-            "denom":"NANOGT", //unit
-            "amount":"10000000" // amount to undelegate
-        }
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type": "StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "MsgUndelegate", //transaction type
-                "value": {
-                    "delegator_address": "gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //delegator  account
-                    "con-account_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //consensus account
-                    "amount": {
-                        "denom": "NANOGT", //unit
-                        "amount": "10000000" //amount to undelegate
-                    }
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "NANOGT", //unit
-                    "amount": "500" //fee
-                } 
-            ],
-            "gas": "200000" //gas consumed by the transaction
-        },
-        "nonces": [
-            null
-        ],
-        "signatures": null, //signature
-        "memo": "",
-        "valid_height":[ //the block height at which transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-### 36. Release of delegation through security account
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST  /v1/staking/delegator/undelegate_by_retrieval_account
-```
-
-**Request Body Example**
-
-```json
-{
-    "base_req":{
-        "from":"gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //sender account
-        "memo":"", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id":"testnet", //chain ID
-        "gas":"200000", //gas consumed by the transaction
-        "fees":[
-            {
-                "denom":"NANOGT",
-                "amount":"500" //fee
-            }
-        ],
-        "simulate":false, //if calculate simulated gas
-        "valid_height":[ //the block height at which transaction takes effect
-            "600",
-            "900"
-    	]
-    },
-    "security_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //security address
-    "delegator_address":["vault11556shquf76lunqu7hz05qtd2yda0gm8y0k2k3ku928nmyhgkjhrh95utu3h5c7wr6wuw7q"]//vault account
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type": "StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "MsgUndelegateByRetrievalAccount", //transaction type
-                "value": {
-                    "security_address": "gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //security address
-                    "delegator_address": "vault11556shquf76lunqu7hz05qtd2yda0gm8y0k2k3ku928nmyhgkjhrh95utu3h5c7wr6wuw7q", //vault account
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "NANOGT", //unit
-                    "amount": "500" //fee
-                } 
-            ],
-            "gas": "200000" //gas consumed by the transaction
-        },
-        "nonces": [
-            null
-        ],
-        "signatures": null, //signature
-        "memo": "",
-        "valid_height":[ //the block height at which transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-### 37. Query Undelegations of A Delegator Account in A consensus Account
-
-**Interface Path**
-
-```bash
-GET /v1/staking/delegator/{delegatorAddr}/{con-account}/undelegations
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-| con-account | String | consensus account|
-
-
-**Return Example**
-
-```json
-{
-    "height": "4595", //block height
-    "result": {
-            "con-account_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //consensus account address
-        "delegator_address": "gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //delegator's account address
-        "entries": [
-            {
-                "balance": "10000000", //undelegated amount 
-                "completion_time": "2020-06-26T13:41:48Z", //time at which the undelegation finishes. That is, the time when principal is received
-                "creation_height": "3977", //block height at which the undelegate  transaction is initiated
-                "initial_balance": "10000000" //token amount at the time the undelegate transaction is initiated. If the consensus account is a bad actor during the undelegating time, the delegator's token will be deducted
-            }
-        ]
-    }
-}
-```
-
-### 38. Query Undelegations of A Delegator Account in All consensus Accounts
-
-**Interface Path**
-
-```bash
-GET /v1/staking/delegator/{delegatorAddr}/undelegations
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-
-
-
-**Return Example**
-
-```json
-{
-    "height": "4595", //block height
-    "result": {
-            "con-account_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //consensus account address
-        "delegator_address": "gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //delegator's account address
-        "entries": [
-            {
-                "balance": "10000000", //Undelegation amount
-                "completion_time": "2020-06-26T13:41:48Z", //time at which the undelegation finishes. That is, the time when principal is received
-                "creation_height": "3977", //block height at which the undelegate  transaction is initiated
-                "initial_balance": "10000000" //token amount at the time the undelegate transaction is initiated. If the consensus account is a bad actor during the undelegating time, the delegator's token will be deducted
-            }
-        ]
-    },
-    ...
-}
-```
-
-### 39. Query All Delegations Of A Specific Consensus Account
-
-**Interface Path**
-
-```bash
-GET /v1/staking/con-account/{con-account}/delegations
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| con-account | String |consensus account|
-
-
-
-**Return Example**
-
-```json
-{
-    "height": "5273", //block height
-    "result": [
-        {
-            "balance": "1000000", //delegation token amount
-            "con-account_address": "gt116h05fjhaay7sx3zl9w5ej3tpx3s94yhcsmt0gqcqsq26w2qvsyt4l82vftygtff0pfsr93", //consensus account
-            "delegator_address": "gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x", //delegator  account
-            "shares": "1000000.000000000000000000" //delegation amount
-        },
-        ...
-    ]
-}
-```
-
-
-### 40. Query All Undelegations Of A Specific Consensus Account
-
-**Interface Path**
-
-```bash
-GET /v1/staking/con-account/{con-account}/undelegations
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| con-account | String |consensus account|
-
-
-
-**Return Example**
-
-```json
-{
-    "height": "5287", //block height
-    "result": [
-        {
-            "con-account_address": "gt11la699nscvukjp5kj07nsgq2styuq63zgy8n04srcldx3dal6fkfa22y8a9fz9thuezvnls", //consensus account address
-            "delegator_address": "gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //delegator  account
-            "entries": [
-                {
-                    "balance": "10000000", //Undelegation amount
-                    "completion_time": "2020-06-26T13:41:48Z", //time at which the undelegation finishes. That is, the time when principal is received
-                    "creation_height": "3977", //block height at which the undelegate  transaction is initiated
-                    "initial_balance": "10000000" //token amount when initiating the undelegate transaction. If the consensus account is a bad actor during the undelegating time, the delegator's token will be deducted
-                }
-            ]
-        }
-    ]
-}
-```
-
-### 41. Query Staking Pool
-
-**Interface Path**
-
-```bash
-GET /v1/staking/pool
-```
-
-**Return Example**
-
-```json
-{
-    "height": "43471",
-    "result": {
-        "bonded_tokens": "2000012230843453",
-        "not_bonded_tokens": "2768799795"
-    }
-}
-```
-
-### 42. Query Staking Parameters
-
-**Interface Path**
-
-```bash
-GET /v1/staking/parameters
-```
-
-**Return Example**
-
-```json
-{
-    "height": "5290", //block height
-    "result": {
-        "bond_denom": "NANOGT", //token unit
-        "max_entries": 7, //supported maximum number of businesses(undelegate and re-delegate businesses)
-        "max_pow_rate": 2, //maximum loyalty coefficient
-        "max_con-accounts": 100, //maximum number of consensus accounts 
-        "pow_rate": 1, //minimum loyalty coefficient
-        "reward_uint_gt": 18, //reward unit
-        "undelegating_time": "1814400000000000" //time when the delegating finishes 
-    }
-}
-```
-
-
-### 43. Setup Account to Fetch Income
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/distribution/delegator/{delegatorAddr}/withdraw_address
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-
-**Request Body Example**
-
-```json
-{
-    "base_req":{
-        "from":"gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //sender account
-        "memo":"", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id":"testnet", //chain ID
-        "gas":"200000", //gas consumed by this  transaction
-        "fees":[
-            {
-                "denom":"NANOGT", //unit
-                "amount":"500" //fee
-            }
-        ],
-        "simulate":false, //If calculate simulated Gas
-        "valid_height":[ //height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    },
-    "withdraw_address": "gt11s9ey8sex7vut2wpxejf5gvejc300kqxpaqf3r7kkkks6ancw0jjrwc3zrwulcqlamjqzwd" //new account to fetch income
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type": "StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "MsgModifyWithdrawAddress", //transaction type
-                "value": {
-                    "delegator_address": "gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x", //delegator's account
-                    "withdraw_address": "gt11s9ey8sex7vut2wpxejf5gvejc300kqxpaqf3r7kkkks6ancw0jjrwc3zrwulcqlamjqzwd" //new account to fetch income
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "NANOGT", //unit
-                    "amount": "500" //fee
-                }
-            ],
-            "gas": "200000" //gas consumed by this  transaction
-        },
-        "nonces": [
-            null
-        ],
-        "signatures": null, //signature
-        "memo": "",
-        "valid_height":[ //height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-Description：
-
-> The vault account can only withdraw the income and principal to this account and cannot be set up separately.
-
-### 44. Delegator Account Fetch Partial Income From A Consensus Account
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/distribution/delegator/{delegatorAddr}/{con-account}/rewards
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-| con-account | String |consensus account|
-**Request Body Example**
-
-```json
-{
-    "base_req":{
-        "from":"gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //sender account
-        "memo":"", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id":"testnet", //chain ID
-        "gas":"200000", //Gas consumed by this  transaction
-        "fees":[
-            {
-                "denom":"NANOGT", //unit
-                "amount":"500" //fee
-            }
-        ],
-        "simulate":false, //If calculate simulated Gas
-        "valid_height":[ //height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type": "StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "MsgWithdrawDelegationReward", //transaction type
-                "value": {
-                    "delegator_address": "gt11a0a2pcna4jmkuz4z8af7tejpyh0u8yh2wtktq8xpjt3qaualzdtwxw7r9cwh88pnkfk4xn", //delegator account
-                    "con-account_address": "gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x" //Consensus Account
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "NANOGT", //unit
-                    "amount": "500" //fee
-                }
-            ],
-            "gas": "200000" //gas consumed by this  transaction
-        },
-        "nonces": [
-            null
-        ],
-        "signatures": null, //signature
-        "memo": "",
-        "valid_height":[ //height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-### 45.Delegator Account Fetch All Income From A Consensus Account
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/distribution/delegator/{delegatorAddr}/rewards
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-
-**Request Body Example**
-
-```json
-{
-    "base_req":{
-        "from":"gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x", //sender account
-        "memo":"", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id":"testnet", //chain ID
-        "gas":"200000", //Gas consumed by this  transaction
-        "fees":[
-            {
-                "denom":"NANOGT", //unit
-                "amount":"500" //fee
-            }
-        ],
-        "simulate":false, //If calculate simulated Gas
-        "valid_height":[ //height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type": "StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "MsgWithdrawDelegationReward", //transaction type
-                "value": {
-                    "delegator_address": "gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x", //delegator's account
-                    "con-account_address": "gt116h05fjhaay7sx3zl9w5ej3tpx3s94yhcsmt0gqcqsq26w2qvsyt4l82vftygtff0pfsr93" //consensus account
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "NANOGT", //unit
-                    "amount": "500" //fee
-                }
-            ],
-            "gas": "200000" //Gas consumed by this  transaction
-        },
-        "nonces": [
-            null
-        ],
-        "signatures": null, //signature
-        "memo": "",
-        "valid_height":[ //height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-### 46.Reinvestment the rewards of the delegator account into the consensus account
-> The interface generates transaction body for " Change Clearing Height".After locally signing it, you can invoke "Send Transaction" interface to finish broadcasting.
-
-
-**Interface Path**
-
-```bash
-POST /v1/distribution/delegator/{delegatorAddr}/{con-account}/rewards_reinvestment
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-| con-account | String |consensus account|
-
-**Request Body Example**
-
-```json
-{
-    "base_req":{
-        "from":"gt11qfee0959earfv7euauzw8l0fljymwjx34m6s2ccvjhupc59dg93enajhuft3eq50tvz39x", //sender account
-        "memo":"", ////transaction remarks,The length of the remarks is limited to 85 characters in Chinese and 256 characters in English.
-        "chain_id":"testnet", //chain ID
-        "gas":"200000", //Gas consumed by this  transaction
-        "fees":[
-            {
-                "denom":"NANOGT", //unit
-                "amount":"100000" //fee
-            }
-        ],
-        "simulate":false, //If calculate simulated Gas
-        "valid_height":[ //height at which the transaction takes effect
-            "600",
-            "900"
-    	]
-    }
-}
-```
-
-**Return Example**
-
-```json
-{
-    "type": "StdTx",
-    "value": {
-        "msg": [
-            {
-                "type": "MsgRewardReinvestment",
-                "value": {
-                    "delegator_address": "gt11mtehamaw8wktwpppx9klrhhfu5upmutzthl0kkpwsa0slw8h4xd3p2ane2zt262dlsyy3m",  //sender account
-                    "con-account_address": "gt11rjq598t8vte64ff2tnesdvsfazv38atpenufj4zl0ljhw2q28jnlxnh6mqgmn6elje6fzc"  //consensus account
-                }
-            }
-        ],
-        "fee": {
-            "amount": [
-                {
-                    "denom": "NANOGT", //unit
-                    "amount": "10000000"  //fee
-                }
-            ],
-            "gas": "10000000" //Gas consumed by this  transaction
-        },
-        "nonces": [
-            null
-        ],
-        "signatures": null,  //If calculate simulated Gas
-        "memo": "",
-        "valid_height": [  //height at which the transaction takes effect
-            "600",
-            "900"
-        ]
-    }
-}
-```
-
-### 47.Query Delegation Income of A Delegator Account At A Consensus Account 
-
-**Interface Path**
-
-```bash
-GET  /v1/distribution/delegator/{delegatorAddr}/{con-account}/rewards
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-| con-account | String |consensus account|
-
-
-**Return Example**
-
-```json
-{
-    "height": "0", //block height
-    "result": [
-        {
-            "amount": "109475.336424214100340000", //delegation income
-            "denom": "NANOGT" //unit
-        }
-    ]
-}
-```
-### 48.Query Delegation Income of A Delegator Account At All Consensus Account
-
-**Interface Path**
-
-```bash
-GET  /v1/distribution/delegator/{delegatorAddr}/rewards
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| delegatorAddr | String |delegator’s account|
-
-
-
-**Return Example**
-
-```json
-{
-    "height": "0", //block height
-    "result": {
-        "rewards": [
-            {
-                "con-account_address": "gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7", //Consensus Account address
-                "reward": [
-                    {
-                        "amount": "105.030990305699919120", //delegation income
-                        "denom": "NANOGT" //unit
-                    }
-                ]
-            },
-            ...
-         ],
-        "total": [
-            {
-                "amount": "105.035150523300345120", //total income from delegation 
-                "denom": "NANOGT" //unit
-            }
-        ]
-    }
-}
-```
-
-### 49.Query Delegation Income Pending Paying By A Consensus Account
-
-**Interface Path**
-
-```bash
-GET /v1/distribution/con-account/{con-account}/outstanding_rewards
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| con-account | String |consensus account|
-
-
-
-**Return Example**
-
-```json
-{
-    "height": "5365", //block height
-    "result": [
-        {
-            "amount": "12227087603299.775054901980000000", //outstanding delegation income pending paying
-            "denom": "NANOGT" //unit
-        }
-    ]
-}
-```
-### 50.Query Consensus Account Income
-
-**Interface Path**
-
-```bash
-GET /v1/distribution/con-account/{con-account}/rewards
-```
-**Parameters**
-
-| Parameter | Type | Description |
-|------|------|------|
-| con-account | String |consensus account|
-
-
-
-**Return Example**
-
-```json
-{
-    "height": "0", //block height
-    "result": [
-        {
-            "amount": "1341380880051.597973936430380729", //commission and mining earnings
-            "denom": "NANOGT" //unit
-        }
-    ]
-}
-```
-
-### 51.Query Distribution And Foundation Parameters
-
-**Interface Path**
-
-```bash
-GET /v1/distribution/parameters
-```
-
-**Return Example**
-
-```json
-{
-    "height": "0", //block height
-    "result": {
-        "community_tax": "0.020000000000000000", //Community Tax rate
-        "first_committee_reward": "0.400000000000000000", //The first Committee mining reward rate
-        "second_committee_reward": "0.350000000000000000", //The second Committee mining reward rate
-        "third_committee_reward": "0.250000000000000000", //The third Committee mining reward rate
-        "withdraw_addr_enabled": true 
-    }
 }
 ```
