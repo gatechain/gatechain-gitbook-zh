@@ -1,3 +1,11 @@
-## GateChain Blockchain
+## GateChain 区块链
 
-GateChain is a novel next-generation public blockchain, focused on onchain asset safety and decentralized trading. With a uniquely designed Vault Account and its functions for handling abnormal transactions, GateChain presents a never before seen clearing mechanism, tackling the challenging problems of asset theft and private key loss. Decentralized trading and cross-chain transfers will also be supported alongside other core features. GateChain focuses on on-chain asset safety and introduced the following novel concepts: Normal Account、Vault Account、Retrieval Account、Clearing Height、Revocable Delay Period、Address Type、Transaction Type.
+GateChain 是一个创新的下一代公共区块链，专注于链上资产安全和去中心化交易。通过独特设计的保险账户及其处理异常交易的功能，GateChain 提供了前所未有的清算机制，解决了资产被盗和私钥丢失的棘手问题。除了其他核心功能外，还将支持去中心化交易和跨链转账。
+
+GateChain 专注于链上资产安全，并引入了以下创新概念：普通账户、保险账户、找回账户、清算高度、可撤销延迟期、地址类型、交易类型。
+
+## 主网
+- Chain ID：86
+
+## Meteora 测试网
+- Chain ID：85

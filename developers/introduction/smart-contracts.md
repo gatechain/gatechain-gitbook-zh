@@ -1,32 +1,248 @@
-# What Is a Smart Contract?
+# EVM (概述)
 
-The term smart contract has been used over the years to describe a wide variety of different things. In the 1990s, cryptographer Nick Szabo coined the term and defined it as "a set of promises, specified in digital form, including protocols within which the parties perform on the other promises." Since then, the concept of smart contracts has evolved, especially after the introduction of decentralized blockchain platforms with the invention of Bitcoin in 2009. In the context of Ethereum, the term is actually a bit of a misnomer, given that Ethereum smart contracts are neither smart nor legal contracts, but the term has stuck. In this book, we use the term "smart contracts" to refer to immutable computer programs that run deterministically in the context of an Ethereum Virtual Machine as part of the Ethereum network protocol—i.e., on the decentralized Ethereum world computer.
+## 概述
 
-## Let's unpack that definition:
+以太坊虚拟机（EVM）是智能合约的运行时环境，可实现与基于以太坊的 dApp 的兼容性。GateChain 是一个 EVM 兼容的区块链。GateChain 的并行化 EVM 确保了高性能和高效率。
 
-### Computer programs
-Smart contracts are simply computer programs. The word "contract" has no legal meaning in this context.
+以下是关于 EVM 的一些关键点：
 
-### Immutable
-Once deployed, the code of a smart contract cannot change. Unlike with traditional software, the only way to modify a smart contract is to deploy a new instance.
+- **图灵完备性**: EVM 是图灵完备的，这意味着它可以执行任何可计算的函数。这使开发者能够编写复杂的智能合约。
+- **Gas**: 在 EVM 兼容网络上的交易和合约执行都需要消耗 gas。Gas 是计算工作量的度量单位，在 GateChain 网络上用户需要支付 gas 费用。Gas 确保恶意或低效的代码不会使网络过载。
+- **字节码执行**: 智能合约被编译成字节码（低级机器可读指令）并部署到 EVM 兼容网络。EVM 执行这些字节码。
 
-### Deterministic
-The outcome of the execution of a smart contract is the same for everyone who runs it, given the context of the transaction that initiated its execution and the state of the Ethereum blockchain at the moment of execution.
+## 智能合约语言
 
-### EVM context
-Smart contracts operate with a very limited execution context. They can access their own state, the context of the transaction that called them, and some information about the most recent blocks.
+在 EVM 上开发智能合约最流行的两种语言是 Solidity 和 Vyper。
 
-### Decentralized world computer
-The EVM runs as a local instance on every Ethereum node, but because all instances of the EVM operate on the same initial state and produce the same final state, the system as a whole operates as a single "world computer."
+### Solidity
 
-## Life Cycle of a Smart Contract
+- 面向对象的高级语言，用于实现智能合约。
+- 大括号语言，主要受 C++ 影响。
+- 静态类型（变量类型在编译时确定）。
+- 支持：
+  - 继承（你可以扩展其他合约）
+  - 库（你可以创建可重用的代码，可以从不同的合约中调用 - 类似于其他面向对象编程语言中静态类中的静态函数）
+  - 复杂的用户自定义类型
 
-Smart contracts are typically written in a high-level language, such as Solidity. But in order to run, they must be compiled to the low-level bytecode that runs in the EVM. Once compiled, they are deployed on the Ethereum platform using a special contract creation transaction, which is identified as such by being sent to the special contract creation address, namely `0x0` 
+### Solidity 合约示例
 
-Each contract is identified by an Ethereum address, which is derived from the contract creation transaction as a function of the originating account and nonce. The Ethereum address of a contract can be used in a transaction as the recipient, sending funds to the contract or calling one of the contract's functions. Note that, unlike with EOAs, there are no keys associated with an account created for a new smart contract. As the contract creator, you don't get any special privileges at the protocol level (although you can explicitly code them into the smart contract). You certainly don't receive the private key for the contract account, which in fact does not exist—we can say that smart contract accounts own themselves.
+```solidity
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >= 0.7.0;
+ 
+contract Coin {
+    // The keyword "public" makes variables
+    // accessible from other contracts
+    address public minter;
+    mapping (address => uint) public balances;
+ 
+    // Events allow clients to react to specific
+    // contract changes you declare
+    event Sent(address from, address to, uint amount);
+ 
+    // Constructor code is only run when the contract
+    // is created
+    constructor() {
+        minter = msg.sender;
+    }
+ 
+    // Sends an amount of newly created coins to an address
+    // Can only be called by the contract creator
+    function mint(address receiver, uint amount) public {
+        require(msg.sender == minter);
+        require(amount < 1e60);
+        balances[receiver] += amount;
+    }
+ 
+    // Sends an amount of existing coins
+    // from any caller to an address
+    function send(address receiver, uint amount) public {
+        require(amount <= balances[msg.sender], "Insufficient balance.");
+        balances[msg.sender] -= amount;
+        balances[receiver] += amount;
+        emit Sent(msg.sender, receiver, amount);
+    }
+}
+```
 
-Importantly, contracts only run if they are called by a transaction. All smart contracts in Ethereum are executed, ultimately, because of a transaction initiated from an EOA. A contract can call another contract that can call another contract, and so on, but the first contract in such a chain of execution will always have been called by a transaction from an EOA. Contracts never run "on their own" or "in the background." Contracts effectively lie dormant until a transaction triggers execution, either directly or indirectly as part of a chain of contract calls. It is also worth noting that smart contracts are not executed "in parallel" in any sense—the Ethereum world computer can be considered to be a single-threaded machine.
+## 在 GateChain 上部署 EVM 合约
 
-Transactions are atomic, regardless of how many contracts they call or what those contracts do when called. Transactions execute in their entirety, with any changes in the global state (contracts, accounts, etc.) recorded only if all execution terminates successfully. Successful termination means that the program executed without an error and reached the end of execution. If execution fails due to an error, all of its effects (changes in state) are "rolled back" as if the transaction never ran. A failed transaction is still recorded as having been attempted, and the ether spent on gas for the execution is deducted from the originating account, but it otherwise has no other effects on contract or account state.
+由于 GateChain 是一个 EVM 兼容链，现有的 EVM 工具如 hardhat、foundry forge 等都可以重复使用。
 
-As mentioned previously, it is important to remember that a contract's code cannot be changed. However, a contract can be "deleted," removing the code and its internal state (storage) from its address, leaving a blank account. Any transactions sent to that account address after the contract has been deleted do not result in any code execution, because there is no longer any code there to execute. To delete a contract, you execute an EVM opcode called `SELFDESTRUCT` (previously called `SUICIDE`). That operation costs "negative gas," a gas refund, thereby incentivizing the release of network client resources from the deletion of stored state. Deleting a contract in this way does not remove the transaction history (past) of the contract, since the blockchain itself is immutable. It is also important to note that the `SELFDESTRUCT` capability will only be available if the contract author programmed the smart contract to have that functionality. If the contract's code does not have a `SELFDESTRUCT` opcode, or it is inaccessible, the smart contract cannot be deleted.
+在这个例子中，我们将使用 foundry 工具。
+
+1. 按照这个[安装指南](https://book.getfoundry.sh/getting-started/installation)安装 foundry 工具。
+2. 按照[创建新项目指南](https://book.getfoundry.sh/projects/creating-a-new-project)创建新项目。
+3. 确保你在 GateChain 网络上有一个钱包。
+
+项目创建后，通过添加 getCounter 函数来修改合约代码：
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+ 
+contract Counter {
+    uint256 public number;
+ 
+    function setNumber(uint256 newNumber) public {
+        number = newNumber;
+    }
+ 
+    function increment() public {
+        number++;
+    }
+ 
+    function getCount() public view returns (uint256) {
+        return number;
+    }
+}
+```
+
+运行以下命令进行测试：
+
+```bash
+$ forge test
+```
+
+如果测试通过，使用以下命令将合约部署到 GateChain 链上：
+
+```bash
+$ forge create --rpc-url $GateChain_NODE_URI --mnemonic $MNEMONIC src/Counter.sol:Counter
+```
+
+其中 `$GateChain_NODE_URI` 是 GateChain 节点的 URI，`$MNEMONIC` 是将部署合约的账户的助记词。如果你运行本地 GateChain 节点，地址将是 `http://localhost:8545`，否则你可以从注册表中获取 evm_rpc url。如果部署成功，你将在输出中获得 EVM 合约地址：
+
+```
+[⠒] Compiling...
+No files changed, compilation skipped
+Deployer: $0X_DEPLOYER_ADDRESS
+Deployed to: $0X_CONTRACT_ADDRESS
+Transaction hash: $0X_TX_HASH
+```
+
+让我们使用 cast 命令查询合约：
+
+```bash
+$ cast call $0X_CONTRACT_ADDRESS "getCount()(uint256)" --rpc-url $GateChain_NODE_URI
+```
+
+该命令应返回 0 作为计数器的初始值。
+
+现在我们可以使用 cast 命令调用 increment 函数：
+
+```bash
+$ cast send $0X_CONTRACT_ADDRESS "increment()" --mnemonic $MNEMONIC --rpc-url $GateChain_NODE_URI
+```
+
+如果命令成功，你将收到交易哈希和其他信息。
+
+现在让我们再次调用 getCount 函数，这次应该返回 1。
+
+## 从 JS 客户端调用合约
+
+要从前端调用合约，你可以使用 ethers，如下所示：
+
+```javascript
+import {ethers} from "ethers";
+ 
+const privateKey = <Your Private Key>;
+const evmRpcEndpoint = <Your Evm Rpc Endpoint>
+const provider = new ethers.JsonRpcProvider(evmRpcEndpoint);
+const signer = new ethers.Wallet(privateKey, provider);
+ 
+if (!signer) {
+    console.log('No signer found');
+    return;
+}
+
+const abi = [
+ {
+      "type": "function",
+      "name": "setNumber",
+      "inputs": [
+        {
+          "name": "newNumber",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
+        "name": "getCount",
+        "inputs": [],
+        "outputs": [
+            {
+                "name": "",
+                "type": "int256",
+                "internalType": "int256"
+            }
+        ],
+        "stateMutability": "view"
+    },
+    {
+        "type": "function",
+        "name": "increment",
+        "inputs": [],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    }
+];
+ 
+// Define the address of the deployed contract
+const contractAddress = 0X_CONTRACT_ADDRESS;
+ 
+// Create a new instance of the ethers.js Contract object
+const contract = new ethers.Contract(contractAddress, abi, signer);
+ 
+// Call the contract's functions
+async function getCount() {
+    const count = await contract.getCount();
+    console.log(count.toString());
+}
+ 
+async function increment() {
+    const txResponse = await contract.increment();
+    const mintedTx = await txResponse.wait();
+    console.log(mintedTx);
+}
+ 
+await increment();
+await getCount();
+```
+
+测试代码如下：
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+ 
+import {Test, console} from "forge-std/Test.sol";
+import {Counter} from "../src/Counter.sol";
+ 
+contract CounterTest is Test {
+    Counter public counter;
+ 
+    function setUp() public {
+        counter = new Counter();
+        counter.setNumber(0);
+    }
+ 
+    function test_Increment() public {
+        counter.increment();
+        assertEq(counter.number(), 1);
+    }
+ 
+    function testFuzz_SetNumber(uint256 x) public {
+        counter.setNumber(x);
+        assertEq(counter.number(), x);
+    }
+ 
+    function test_GetCount() public {
+        uint256 initialCount = counter.getCount();
+        counter.increment();
+        assertEq(counter.getCount(), initialCount + 1);
+    }
+}

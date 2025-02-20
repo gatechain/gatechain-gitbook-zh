@@ -1,46 +1,47 @@
-# Deploy Smart Contract to GateChain Mainnet using Hardhat
+# 使用 Hardhat 在 GateChain 主网上部署智能合约
 
-This guide provides a step-by-step tutorial on how to deploy smart contracts on GateChain Mainnet using Hardhat - a popular Ethereum development environment. You'll learn how to set up a Hardhat project, configure it for GateChain, write a simple smart contract, and deploy it to the GateChain Mainnet. This tutorial is perfect for developers who are familiar with Ethereum development and want to start building on GateChain.
-## 1. Create Hardhat Project
+本指南提供了一个使用 Hardhat（一个流行的以太坊开发环境）在 GateChain 主网上部署智能合约的分步教程。您将学习如何设置 Hardhat 项目、为 GateChain 配置它、编写一个简单的智能合约，并将其部署到 GateChain 主网。本教程非常适合熟悉以太坊开发并想要开始在 GateChain 上构建的开发者。
 
-### 1.1 Create Project Directory
+## 1. 创建 Hardhat 项目
+
+### 1.1 创建项目目录
 ```bash
 mkdir hardhat && cd hardhat
 ```
 
-### 1.2 Initialize Project (Create package.json)
+### 1.2 初始化项目（创建 package.json）
 ```bash
 npm init -y
 ```
-![console output](../../.gitbook/assets/images/init_package.png)
+![控制台输出](../../.gitbook/assets/images/init_package.png)
 
 
-### 1.3 Install Hardhat
+### 1.3 安装 Hardhat
 ```bash
 npm install hardhat
 ```
 
-### 1.4 Create Hardhat Project
+### 1.4 创建 Hardhat 项目
 ```bash
 npx hardhat init
 ```
-![console output](../../.gitbook/assets/images/init_hardhat.png)
+![控制台输出](../../.gitbook/assets/images/init_hardhat.png)
 
-### 1.5 Select Project Type
-Choose `Create an empty hardhat.config.js` option, which will create a basic Hardhat configuration file for your project.
+### 1.5 选择项目类型
+选择 `Create an empty hardhat.config.js` 选项，这将为您的项目创建一个基本的 Hardhat 配置文件。
 
-## 2. Modify Hardhat Configuration File
+## 2. 修改 Hardhat 配置文件
 
-### 2.1 Configure hardhat.config.js
+### 2.1 配置 hardhat.config.js
 
-Main configuration contents:
-- Solidity compiler version: 0.8.18
-- GateChain Mainnet EVM RPC address options:
-  - https://evm.nodeinfo.cc (recommended)
+主要配置内容：
+- Solidity 编译器版本：0.8.18
+- GateChain 主网 EVM RPC 地址选项：
+  - https://evm.nodeinfo.cc（推荐）
   - https://evm-1.nodeinfo.cc
   - https://evm.gatenode.cc
-  - https://evm-hk.gatenode.cc (Hong Kong node)
-- chainId: 86 (GateChain Mainnet Chain ID)
+  - https://evm-hk.gatenode.cc（香港节点）
+- chainId：86（GateChain 主网链 ID）
 
 ```javascript
 require("@nomicfoundation/hardhat-toolbox");
@@ -63,19 +64,19 @@ module.exports = {
 };
 ```
 
-## 3. Write Contract File
+## 3. 编写合约文件
 
-### 3.1 Create Contracts Directory
+### 3.1 创建 Contracts 目录
 ```bash
 mkdir contracts
 ```
 
-### 3.2 Create Contract File
+### 3.2 创建合约文件
 ```bash
 touch contracts/Storage.sol
 ```
 
-### 3.3 Contract Content
+### 3.3 合约内容
 ```solidity
 pragma solidity ^0.8.0;
 
@@ -92,30 +93,30 @@ contract Storage {
 }
 ```
 
-## 4. Compile Solidity
+## 4. 编译 Solidity
 
-### 4.1 Install Dependencies
+### 4.1 安装依赖
 ```bash
 npm install @nomicfoundation/hardhat-toolbox@^2.0.2 @nomiclabs/hardhat-web3@^2.0.0
 ```
 
-### 4.2 Compile Contract
+### 4.2 编译合约
 ```bash
 npx hardhat compile
 ```
-![compile result](../../.gitbook/assets/images/compile_contract.png)
+![编译结果](../../.gitbook/assets/images/compile_contract.png)
 
 
-After compilation, an `artifacts` directory will be created in the project, containing the contract bytecode and metadata (.json files). It is recommended to add this directory to .gitignore.
+编译后，项目中将创建一个 `artifacts` 目录，其中包含合约字节码和元数据（.json 文件）。建议将此目录添加到 .gitignore 中。
 
-## 5. Deploy Contract
+## 5. 部署合约
 
-### 5.1 Create Deployment Script
+### 5.1 创建部署脚本
 ```bash
 mkdir scripts && touch scripts/deploy.js
 ```
 
-### 5.2 Deployment Script Content
+### 5.2 部署脚本内容
 ```javascript
 const { ethers } = require("hardhat");
 async function deploy(deployer) {
@@ -158,17 +159,17 @@ main() .then(() => process.exit(0))
     });
 ```
 
-### 5.3 Run Deployment Script
+### 5.3 运行部署脚本
 ```bash
 npx hardhat run scripts/deploy.js --network Mainnet
 ```
-![deploy result](../../.gitbook/assets/images/deploy_contract.png)
+![部署结果](../../.gitbook/assets/images/deploy_contract.png)
 
-## 6. Query Transactions
+## 6. 查询交易
 
-After deployment, you can view the contract interaction details on the GateChain block explorer.
+部署后，您可以在 GateChain 区块浏览器上查看合约交互详情。
 
-Important Notes:
-- Make sure to replace the `privateKey` in the configuration file with your own private key
-- Ensure you have enough GT in your account to pay for gas fees before deployment
-- It is recommended to test on the testnet before deploying to mainnet 
+重要提示：
+- 确保将配置文件中的 `privateKey` 替换为您自己的私钥
+- 部署前确保您的账户中有足够的 GT 支付 gas 费用
+- 建议在部署到主网之前在测试网上进行测试 

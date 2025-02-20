@@ -1,59 +1,59 @@
-# Introduction to Fee Proxy
+# Fee Proxy 介绍
 
-## What is Fee Proxy?
+## 什么是 Fee Proxy？
 
-A **Fee Proxy** is a mechanism that allows users to interact with blockchain-based smart contracts without directly paying gas fees in the native cryptocurrency of the network. Instead, a third party (often called a "sponsor" or "relayer") covers the transaction costs on behalf of the user. This concept is crucial for improving user experience and onboarding new users unfamiliar with blockchain transactions.
+**Fee Proxy** 是一种机制，允许用户与基于区块链的智能合约进行交互，而无需直接使用网络的原生加密货币支付 gas 费用。相反，第三方（通常称为"sponsor"或"relayer"）代表用户承担交易成本。这个概念对于改善用户体验和吸引不熟悉区块链交易的新用户至关重要。
 
-## How Does Fee Proxy Work?
+## Fee Proxy 如何工作？
 
-1. **User Signs a Transaction Off-Chain**  
-   - Instead of sending a transaction with gas fees in a native token (e.g., ETH for Ethereum), the user signs a message off-chain, authorizing the transaction.
+1. **用户在链下签署交易**  
+   - 用户不需要使用原生代币（如以太坊的 ETH）发送带有 gas 费用的交易，而是在链下签署消息，授权交易。
 
-2. **Transaction is Relayed by a Sponsor**  
-   - A designated relayer or sponsor receives the signed message and submits it on-chain, paying the required gas fee.
+2. **交易由 Sponsor 中继**  
+   - 指定的 relayer 或 sponsor 接收已签名的消息并将其提交到链上，支付所需的 gas 费用。
 
-3. **Fee Compensation Mechanisms**  
-   - The sponsor may cover the cost freely (as part of an incentive mechanism).  
-   - The user may reimburse the sponsor in another token.  
-   - The protocol may integrate alternative fee models, such as subscription-based or metered services.
+3. **费用补偿机制**  
+   - sponsor 可以免费承担成本（作为激励机制的一部分）。  
+   - 用户可以用其他代币补偿 sponsor。  
+   - 协议可以集成替代性的收费模式，如基于订阅或计量的服务。
 
-## Benefits of Fee Proxy
+## Fee Proxy 的优势
 
-### 1. **Enhanced User Experience**
-   - Removes the barrier of acquiring native tokens for gas fees.
-   - Simplifies onboarding for non-crypto-savvy users.
+### 1. **增强用户体验**
+   - 消除了获取原生代币支付 gas 费用的障碍。
+   - 简化了非加密货币用户的入门过程。
 
-### 2. **Increased Adoption**
-   - Encourages mainstream users to interact with blockchain applications without friction.
+### 2. **提高采用率**
+   - 鼓励主流用户无障碍地与区块链应用程序交互。
 
-### 3. **Flexible Payment Models**
-   - Enables applications to introduce alternative monetization models (e.g., paying fees in stablecoins, NFTs, or other assets).
+### 3. **灵活的支付模式**
+   - 使应用程序能够引入替代性的盈利模式（例如，使用 stablecoins、NFT 或其他资产支付费用）。
 
-### 4. **Sponsor-Based Ecosystems**
-   - Allows businesses or projects to subsidize transaction fees, enhancing user retention.
+### 4. **基于 Sponsor 的生态系统**
+   - 允许企业或项目补贴交易费用，提高用户留存率。
 
-## Use Cases
+## 使用场景
 
-- **Decentralized Applications (DApps)**  
-  Applications integrating Fee Proxy mechanisms can offer seamless transactions, such as gaming, DeFi platforms, and NFT marketplaces.
+- **去中心化应用程序 (DApps)**  
+  集成 Fee Proxy 机制的应用程序可以提供无缝交易，如游戏、DeFi 平台和 NFT 市场。
 
-- **Wallets & Account Abstraction**  
-  Smart contract wallets leveraging fee proxies can enable gasless transactions for users.
+- **钱包和账户抽象**  
+  利用 fee proxy 的智能合约钱包可以为用户启用免 gas 交易。
 
-- **Enterprise Solutions**  
-  Businesses can sponsor transactions to improve usability and customer experience in blockchain-based solutions.
+- **企业解决方案**  
+  企业可以赞助交易以改善区块链解决方案的可用性和客户体验。
 
-## Technologies Behind Fee Proxy
+## Fee Proxy 背后的技术
 
 - **Meta-Transactions**  
-  Uses cryptographic signatures to allow third parties to submit transactions on behalf of users.
+  使用加密签名允许第三方代表用户提交交易。
 
-- **Gas Stations & Relayers**  
-  Specialized services act as intermediaries to facilitate fee payments.
+- **Gas Stations 和 Relayers**  
+  专门的服务作为中介来促进费用支付。
 
-- **EIP-4337 & Account Abstraction**  
-  Ethereum's recent developments in account abstraction improve Fee Proxy mechanisms by enabling smart contract-based accounts with custom fee payment logic.
+- **EIP-4337 和 Account Abstraction**  
+  以太坊在账户抽象方面的最新发展通过启用具有自定义费用支付逻辑的智能合约账户，改进了 Fee Proxy 机制。
 
-## Conclusion
+## 结论
 
-Fee Proxy solutions play a vital role in making blockchain transactions more user-friendly. By abstracting gas fees and enabling alternative payment methods, they contribute to the mass adoption of decentralized applications and services. As blockchain technology evolves, Fee Proxy mechanisms are expected to become a standard feature in user-centric Web3 applications.
+Fee Proxy 解决方案在使区块链交易更加用户友好方面发挥着重要作用。通过抽象 gas 费用并启用替代支付方法，它们促进了去中心化应用程序和服务的大规模采用。随着区块链技术的发展，Fee Proxy 机制有望成为以用户为中心的 Web3 应用程序的标准功能。

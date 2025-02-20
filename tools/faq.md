@@ -1,96 +1,96 @@
-### Frequently Asked Questions (FAQ)
+# 常见问题（FAQ）
 
-#### Q: What does GateChain's EVM compatibility mean?
+#### 问：GateChain 的 EVM 兼容性是什么意思？
 
-EVM (Ethereum Virtual Machine) is a component specifically designed to execute smart contracts on the Ethereum blockchain. Traditional first-generation blockchains like BTC, LTC, and Doge cannot execute smart contracts and only support transfers between accounts.
+EVM（Ethereum Virtual Machine，以太坊虚拟机）是专门用于在以太坊区块链上执行智能合约的组件。传统的第一代区块链如 BTC、LTC、Doge 等无法执行智能合约，只支持账户之间的转账。
 
-Ethereum, as a representative of second-generation blockchain, provides the EVM smart contract runtime environment in addition to account transfer functionality. Each node joining Ethereum runs EVM to process smart contract transactions.
+以太坊作为第二代区块链的代表，除了账户转账功能外，还提供了 EVM 智能合约运行环境。每个加入以太坊的节点都运行 EVM 来处理智能合约交易。
 
-For example: Early phones (blockchain) only had calling and texting functions. Later, Microsoft, Apple, and Google launched their own smartphone operating systems (like EVM) installed on better-performing phones, allowing each phone to run third-party developed apps (smart contracts).
+举例说明：早期手机（区块链）只有打电话和发短信功能。后来，微软、苹果、谷歌推出了自己的智能手机操作系统（相当于 EVM）安装在性能更好的手机上，使每部手机都能运行第三方开发的应用程序（智能合约）。
 
-Therefore, EVM compatibility means that GateChain not only supports regular account transfers but also provides a smart contract execution environment. Developers can deploy their smart contract code from Ethereum, BSC, and other chains directly on GateChain without any modifications.
+因此，EVM 兼容性意味着 GateChain 不仅支持普通账户转账，还提供了智能合约执行环境。开发者可以将他们在以太坊、BSC 等链上的智能合约代码直接部署到 GateChain 上，无需任何修改。
 
-Examples:
-- Ethereum regular transfer transaction: [Example](https://etherscan.io/tx/0x46eefc3ab029c8e4737f0deba186b3c0e3282fbfdfc515849f9ef9093563f690)
-- Ethereum smart contract transaction: [Example](https://etherscan.io/tx/0xd0cc5983fd933f6e3468b731476a55957721fe7534b76f6cebd8f2b5a8df2d65)
+示例：
+- 以太坊普通转账交易：[示例](https://etherscan.io/tx/0x46eefc3ab029c8e4737f0deba186b3c0e3282fbfdfc515849f9ef9093563f690)
+- 以太坊智能合约交易：[示例](https://etherscan.io/tx/0xd0cc5983fd933f6e3468b731476a55957721fe7534b76f6cebd8f2b5a8df2d65)
 
-#### Q: What is ERC-20?
+#### 问：什么是 ERC-20？
 
-[ERC-20 Standard](https://eips.ethereum.org/EIPS/eip-20)
+[ERC-20 标准](https://eips.ethereum.org/EIPS/eip-20)
 
-ERC stands for Ethereum Request for Comment, used to propose improvements for tokens and the Ethereum ecosystem. After an ERC is submitted, the Ethereum community evaluates it and decides whether to accept or reject the proposal. Once approved, the ERC becomes an official Ethereum Improvement Proposal (EIP).
+ERC 是 Ethereum Request for Comment 的缩写，用于提出代币和以太坊生态系统的改进建议。ERC 提交后，以太坊社区对其进行评估并决定是否接受或拒绝该提案。一旦获得批准，ERC 就成为正式的以太坊改进提案（EIP）。
 
-Simply put, token standards define the data and functionality that each token must implement. On Ethereum, besides the native ETH token, all other tokens are ERC tokens conforming to various standards.
+简单来说，代币标准定义了每个代币必须实现的数据和功能。在以太坊上，除了原生的 ETH 代币外，所有其他代币都是符合各种标准的 ERC 代币。
 
-ERC-20 was introduced in November 2015 and officially standardized in September 2017. This protocol specifies a set of basic interfaces for fungible tokens, including token symbols, supply, transfer, and authorization. Tokens complying with this standard are fully compatible with Ethereum wallets.
+ERC-20 于 2015 年 11 月提出，并于 2017 年 9 月正式标准化。该协议规定了一组可替代代币的基本接口，包括代币符号、供应量、转账和授权等。符合该标准的代币与以太坊钱包完全兼容。
 
-For more information about ERC-20, please visit [gate.io](https://www.gate.io/bitwiki/detail/211).
+更多关于 ERC-20 的信息，请访问 [gate.io](https://www.gate.io/bitwiki/detail/211)。
 
-#### Q: What is ERC-721?
+#### 问：什么是 ERC-721？
 
-[ERC-721 Standard](https://eips.ethereum.org/EIPS/eip-721)
+[ERC-721 标准](https://eips.ethereum.org/EIPS/eip-721)
 
-ERC-721 was proposed in January 2018 and is the underlying standard for the NFT boom. The main difference from ERC-20 is that each token has a unique identifier. With numbered identifiers, different token IDs can represent different values, similar to artwork.
+ERC-721 于 2018 年 1 月提出，是 NFT 热潮的底层标准。与 ERC-20 的主要区别在于每个代币都有一个唯一的标识符。通过编号标识，不同的代币 ID 可以代表不同的价值，类似于艺术品。
 
-For example: If ERC-20 is like regular currency where each unit has the same value and purchasing power, then ERC-721 is like commemorative coins issued by banks, each with a unique number, belonging to only one account, and varying significantly in price.
+举例说明：如果说 ERC-20 像普通货币，每个单位都具有相同的价值和购买力，那么 ERC-721 就像银行发行的纪念币，每个都有独特的编号，只属于一个账户，价格差异也很大。
 
-#### Q: What is ERC-1155?
+#### 问：什么是 ERC-1155？
 
-[ERC-1155 Standard](https://eips.ethereum.org/EIPS/eip-1155)
+[ERC-1155 标准](https://eips.ethereum.org/EIPS/eip-1155)
 
-ERC-1155, proposed in June 2018, is called the Multi Token Standard. It means that when issuing an ERC-1155 token, it can contain multiple types of ERC tokens, including ERC-20 and ERC-721. It's essentially a token collection concept.
+ERC-1155 于 2018 年 6 月提出，被称为多代币标准。这意味着在发行 ERC-1155 代币时，可以包含多种类型的 ERC 代币，包括 ERC-20 和 ERC-721。本质上是一个代币集合的概念。
 
-#### Q: Do I need to create new accounts on different machines when running multiple virtual machines? Can these VMs share one account?
+#### 问：运行多个虚拟机时，是否需要在不同机器上创建新账户？这些虚拟机可以共用一个账户吗？
 
-If you need multiple virtual machines to participate in consensus, you must create accounts on new machines and bring consensus accounts online.
+如果需要多个虚拟机参与共识，必须在新机器上创建账户并使共识账户上线。
 
-#### Q: When running multiple nodes, does each node need to synchronize blockchain information separately?
+#### 问：运行多个节点时，每个节点是否都需要单独同步区块链信息？
 
-You can synchronize separately or package information from other synchronized nodes to new nodes. Specific method: Package and copy the root directory where gated runs (default ~/.gated folder). However, if your multiple nodes want to create new consensus accounts to participate in consensus, you need to delete the copied partkey (located in ~/.gated/mainnet/ with .0.0.partkey extension) and create new consensus accounts.
+可以单独同步，也可以将其他已同步节点的信息打包到新节点。具体方法：打包并复制 gated 运行的根目录（默认 ~/.gated 文件夹）。但是，如果您的多个节点想要创建新的共识账户参与共识，需要删除复制的 partkey（位于 ~/.gated/mainnet/ 下，扩展名为 .0.0.partkey）并创建新的共识账户。
 
-#### Q: After successfully setting up a node, using gatecli command returns error: open /Users/XXX/.gatecli/api.token: no such file or directory
+#### 问：成功搭建节点后，使用 gatecli 命令返回错误：open /Users/XXX/.gatecli/api.token: no such file or directory
 
-This occurs because there's no api.token in the .gatecli directory. You need to copy it from the .gated directory using the command: `cp ~/.gated/api.token ~/.gatecli/`
+这是因为 .gatecli 目录中没有 api.token。您需要从 .gated 目录复制它，使用命令：`cp ~/.gated/api.token ~/.gatecli/`
 
-#### Q: Using gatecli account show [address] command returns error: account XXXX does not exist, why?
+#### 问：使用 gatecli account show [address] 命令返回错误：account XXXX does not exist，为什么？
 
-This is because the account you're querying isn't on-chain. You need to send a transaction to this account, and after the transaction succeeds, you can query it.
+这是因为您查询的账户不在链上。您需要向这个账户发送一笔交易，交易成功后才能查询到。
 
-#### Q: How to recover an account using mnemonic phrases after creating it?
+#### 问：创建账户后，如何使用助记词恢复账户？
 
-Use the command `gatecli account create --recover` to recover your account.
+使用命令 `gatecli account create --recover` 恢复您的账户。
 
-#### Q: If I transferred money to a locally created account but haven't synchronized to that transaction block height, how can I quickly transfer out from this account?
+#### 问：如果我向本地创建的账户转了钱，但还没同步到该笔交易的区块高度，如何快速从这个账户转出？
 
-You can construct the transaction body via RPC, sign it locally, and then broadcast via RPC. Specific steps:
+您可以通过 RPC 构造交易体，本地签名后通过 RPC 广播。具体步骤：
 
-1. Construct transaction body, modify valid_height parameter, suggested to modify to 300 blocks after GateChain's current latest height. [Guide](../../developers/api/tx/index.md#普通交易)
-2. Save the returned transaction body to your desktop, then execute locally: `gatecli tx sign [transaction body file] --from [sender account] --chain-id mainnet --offline --account-number 1`
-3. Copy the signed information and broadcast the transaction. [Guide](../../developers/api/tx/index.md#发送交易)
-4. GateChain API node list. [Enter](../../integration/rpc-node-list/index.md)
+1. 构造交易体，修改 valid_height 参数，建议修改为 GateChain 当前最新高度后 300 个区块。[指南](../../developers/api/tx/index.md#普通交易)
+2. 将返回的交易体保存到桌面，然后本地执行：`gatecli tx sign [交易体文件] --from [发送方账户] --chain-id mainnet --offline --account-number 1`
+3. 复制签名信息并广播交易。[指南](../../developers/api/tx/index.md#发送交易)
+4. GateChain API 节点列表。[进入](../../integration/rpc-node-list/index.md)
 
-#### Q: Already transferred money to the consensus account preparing to go online, but still getting error when bringing consensus account online: account XXXX does not exist, why?
+#### 问：已经向准备上线的共识账户转了钱，但共识账户上线时仍报错：account XXXX does not exist，为什么？
 
-Please confirm that your local sync node has reached ≥ the transaction block height of the consensus account transfer. If it's <, wait for synchronization to the transfer transaction before bringing the consensus account online.
+请确认您的本地同步节点是否已达到 ≥ 共识账户转账交易的区块高度。如果 <，请等待同步到转账交易后再进行共识账户上线。
 
-#### Q: What affects the loyalty coefficient of consensus accounts?
+#### 问：什么会影响共识账户的忠诚系数？
 
-The loyalty coefficient increases with the number of times selected for the committee. If your node hasn't participated in consensus for a long time, GateChain will automatically process the consensus account as offline, and the loyalty coefficient will drop to 1.
+忠诚系数随着被选入委员会的次数增加而增加。如果您的节点长期未参与共识，GateChain 会自动将共识账户处理为下线状态，忠诚系数会降为 1。
 
-#### Q: What should I do if I delegated to a consensus account but found it hasn't participated in consensus for a long time?
+#### 问：如果我委托给了一个共识账户，但发现它长期未参与共识，该怎么办？
 
-There is indeed a risk of revenue loss in consensus account delegation. For example, if the delegated node can't participate in mainnet consensus due to factors like network outage or power failure, it won't generate revenue. It's recommended that users set up their own nodes to ensure stable network connectivity. For users who find their consensus account hasn't participated in consensus for a long time and are unable to set up their own nodes, they can transfer their delegation to other consensus accounts.
+共识账户委托确实存在收益损失的风险。例如，如果被委托的节点因网络中断、断电等因素无法参与主网共识，就不会产生收益。建议用户自行搭建节点，确保网络连接稳定。对于发现自己的共识账户长期未参与共识且无法自行搭建节点的用户，可以将委托转移到其他共识账户。
 
-#### Q: Which block did GateChain start supporting smart contracts?
+#### 问：GateChain 从哪个区块开始支持智能合约？
 
-Block 731444
+区块 731444
 
-#### Q: EVM interface, getting BlockNumber returns 404 error.
+#### 问：EVM 接口，获取 BlockNumber 返回 404 错误。
 
-Check if your port 8080 is occupied by gated. Port 8080 must be free when gated starts. Otherwise, you need to modify the config.json file, and EVM RPC startup needs additional parameters. It's recommended to keep port 8080 free for gated use.
+检查您的 8080 端口是否被 gated 占用。gated 启动时必须保持 8080 端口空闲。否则，需要修改 config.json 文件，EVM RPC 启动需要额外参数。建议保持 8080 端口空闲供 gated 使用。
 
-#### Q: EVM interface, getting BlockNumber returns error: HTTP 401 Unauthorized: Invalid API Token
+#### 问：EVM 接口，获取 BlockNumber 返回错误：HTTP 401 Unauthorized: Invalid API Token
 
-Execute this command: `cp ~/.gated/api.token ~/.gatecli/`
+执行此命令：`cp ~/.gated/api.token ~/.gatecli/`
 
-> FAQ continues to be updated...
+> FAQ 持续更新中...

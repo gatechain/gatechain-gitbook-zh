@@ -1,33 +1,93 @@
-# Transactions
+# 交易和区块架构
 
-Transactions are signed messages originated by an externally owned account, transmitted by the Ethereum network, and recorded on the Ethereum blockchain. This basic definition conceals a lot of surprising and fascinating details. Another way to look at transactions is that they are the only things that can trigger a change of state, or cause a contract to execute in the EVM. Ethereum is a global singleton state machine, and transactions are what make that state machine "tick," changing its state. Contracts don't run on their own. Ethereum doesn't run autonomously. Everything starts with a transaction.
+交易在 GateChain 中代表触发区块链状态变化的基本操作。理解交易和区块架构对于在 GateChain 上开发的开发者来说至关重要。
 
+## 交易流程
 
-## The Structure of a Transaction
+### 1. 交易创建和传播
+- 用户使用私钥创建和签名交易
+- 已签名的交易被传播到 GateChain 网络
+- 每个交易包含发送者、接收者、值和数据等基本信息
 
-First let's take a look at the basic structure of a transaction, as it is serialized and transmitted on the Ethereum network. Each client and application that receives a serialized transaction will store it in-memory using its own internal data structure, perhaps embellished with metadata that doesn't exist in the network serialized transaction itself. The network-serialization is the only standard form of a transaction.
+### 2. 交易池（Mempool）
+- 未确认的交易存储在交易池中
+- 验证者根据以下条件从交易池中选择交易：
+  - Gas 价格优先级
+  - 交易 nonce
+  - 账户余额验证
 
-A transaction is a serialized binary message that contains the following data:
+### 3. 区块创建
+- 验证者通过以下方式创建新区块：
+  - 从交易池中选择交易
+  - 验证交易签名
+  - 执行交易操作
+  - 更新状态
 
-- **Nonce**: A sequence number, issued by the originating EOA, used to prevent message replay
+### 4. 区块验证和共识
+- 新区块通过共识机制
+- 其他验证者验证：
+  - 区块哈希
+  - 交易签名
+  - 状态转换
+  - 共识规则
 
-- **Gas price**: The price of gas (in wei) the originator is willing to pay
+### 5. 区块最终确定
+- 一旦达成共识：
+  - 区块被添加到链上
+  - 状态被更新
+  - 交易被标记为已确认
 
-- **Gas limit**: The maximum amount of gas the originator is willing to buy for this transaction
+## 区块结构
 
-- **Recipient**: The destination Ethereum address
+### 区块头
+- 前一个区块哈希
+- 时间戳
+- 区块高度
+- 状态根
+- 交易根
+- 共识相关数据
 
-- **Value**: The amount of ether to send to the destination
+### 区块体
+- 交易列表
+- 交易收据
+- 执行结果
 
-- **Data**: The variable-length binary data payload
+## 交易类型
 
-- **v,r,s**: The three components of an ECDSA digital signature of the originating EOA
+1. **价值转移**
+   - 标准代币转账
+   - 原生代币（GT）转账
 
-The transaction message's structure is serialized using the Recursive Length Prefix (RLP) encoding scheme, which was created specifically for simple, byte-perfect data serialization in Ethereum. All numbers in Ethereum are encoded as big-endian integers, of lengths that are multiples of 8 bits.
+2. **智能合约操作**
+   - 合约部署
+   - 合约方法调用
+   - 状态修改
 
-Note that the field labels (to, gas limit, etc.) are shown here for clarity, but are not part of the transaction serialized data, which contains the field values RLP-encoded. In general, RLP does not contain any field delimiters or labels. RLP's length prefix is used to identify the length of each field. Anything beyond the defined length belongs to the next field in the structure.
+3. **系统操作**
+   - 验证者操作
+   - 治理提案
+   - 参数更新
 
-While this is the actual transaction structure transmitted, most internal representations and user interface visualizations embellish this with additional information, derived from the transaction or from the blockchain.
+## 交易生命周期
 
-For example, you may notice there is no "from" data in the address identifying the originator EOA. That is because the EOA's public key can be derived from the v,r,s components of the ECDSA signature. The address can, in turn, be derived from the public key. When you see a transaction showing a "from" field, that was added by the software used to visualize the transaction. Other metadata frequently added to the transaction by client software includes the block number (once it is mined and included in the blockchain) and a transaction ID (calculated hash). Again, this data is derived from the transaction, and does not form part of the transaction message itself.
+1. **创建**
+   - 交易签名
+   - 参数设置
+   - Gas 估算
 
+2. **验证**
+   - 签名验证
+   - 余额检查
+   - Nonce 验证
+
+3. **执行**
+   - 状态变更
+   - 事件发出
+   - 结果记录
+
+4. **最终确定**
+   - 收据生成
+   - 状态提交
+   - 区块包含
+
+![交易结构](../../.gitbook/assets/images/transaction.png)

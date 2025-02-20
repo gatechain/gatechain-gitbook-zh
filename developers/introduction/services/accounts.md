@@ -1,23 +1,23 @@
-Gatechain account types are divided into Normal Account、Consensus Account Vault Account、EVM Account，enabling users to seamlessly navigate through the digital era without any safety concerns,You can log on GateChain directly with your Ethereum account getting access to GateChain’s EVM.
+GateChain 账户类型分为 Normal Account、Consensus Account、Vault Account 和 EVM Account，使用户能够在数字时代无忧地进行操作。您可以直接使用您的 Ethereum 账户登录 GateChain，访问 GateChain 的 EVM。
 
 ### Normal Account
 
-Normal Account：starts with "gt". "gt1" indicates a single-signature Normal Account, and "gt2" indicates a multi-signature Normal Account.
+Normal Account：以"gt"开头。"gt1"表示单签名 Normal Account，"gt2"表示多签名 Normal Account。
 
-Storage of assets, suitable for daily use. Assets in this type of account can be sent instantly and transactions are irreversible once confirmed on-chain. Lost private key can not be restored.
+用于资产存储，适合日常使用。此类账户中的资产可以立即发送，交易一旦在链上确认就不可撤销。丢失的私钥无法恢复。
 
 ### Vault Account
 
-Vault Account：starts with "vault"."vault1" indicates a single-signature Vault Account, and "vault2" indicates a multi-signature Vault Account.
+Vault Account：以"vault"开头。"vault1"表示单签名 Vault Account，"vault2"表示多签名 Vault Account。
 
-A new type of account that features revocable transactions. Assets in this type of account are transferred after a preset delay. Suitable for storage and safekeeping of funds not ment for immediate use.
+这是一种具有可撤销交易功能的新型账户。此类账户中的资产在预设延迟后才会转移。适合存储和保管不需要立即使用的资金。
 
 ### Consensus Account
 
-Build a GateChain Full Node and Work as a Consensus Account.By building a full node to participate in the consensus, you can earn delegation commission on top of your mining revenue, as you can opt to accept delegations from other accounts.
+通过建立 GateChain Full Node 并作为 Consensus Account 工作。通过建立全节点参与共识，您可以在挖矿收入之外赚取委托佣金，因为您可以选择接受其他账户的委托。
 
 ### EVM Account
 
-An EVM Account is similar to a native Ethereum account in use case, format, and security.You can log on GateChain directly with your Ethereum account getting access to GateChain’s EVM, without needing to create a new account.
+EVM Account 在使用场景、格式和安全性方面与原生 Ethereum 账户类似。您可以直接使用您的 Ethereum 账户登录 GateChain，访问 GateChain 的 EVM，无需创建新账户。
 
-Besides simplicity and convenience, GateChain is also characterized by an unparalleled level of security. Transactions can occur directly between GateChain vault accounts and EVM-accounts, accessing innovative features such as retrievable transactions and a clearing!
+除了简单和便利之外，GateChain 还具有无与伦比的安全性。交易可以直接在 GateChain vault accounts 和 EVM-accounts 之间进行，访问创新功能如可撤销交易和清算！

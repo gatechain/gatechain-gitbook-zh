@@ -1,27 +1,67 @@
+# 代币标准
 
-## Overview
+本节将深入探讨 GateChain 支持的各种代币标准。理解这些标准对开发者来说至关重要，因为它们构成了许多去中心化应用的基础。
 
-Issued assets are stored on GateChain in in the form of tokens. Issued assets should comply with GateChain's Token Management Standards.
-    
-Asset owners can additionally issue, burn, and freeze/unfreeze their assets. These functions incur fees, paid in GateTokens.
+GateChain 支持多种主要代币类型：
 
+- [GateChain Token (GT)](#gt)
+- [同质化代币](#fungible-tokens)
+- [NFTs](#nfts)
 
-## Issuance
+## GT
 
-Via Cli or API, you can issue your own digital assets on GateChain.
+GT 是 GateChain 的原生代币，在生态系统中担任多个角色：
 
-The issuer may fill in the parameters according to the requirements. After being verified, the issuer can publish his own digital asset in the form of a token on GateChain. 
+- 费用代币：用于支付 GateChain 网络上的交易费用。
+- 治理代币：用于参与影响网络的治理决策。
 
-> Token issuance incurs a fee of 200GT, please make sure you have adequate GT token at account.
+### EVM
 
+```
+1GT = 10**18 wei = 1000000000000000000wei
+1GT = 10**9 wei = 1000000000gwei (giga-wei)
+```
 
+### 原生
 
-## ERC20 Token
+```
+1GT = 10**9 NANOGT = 1000000000nGT (nano-GT)
+```
 
-This standard specifies the functions and event records that the Ethereum token contract needs to implement, that is, a set of api standards. It has developed a set of standard interfaces for the Ethereum token contract, so that a wide variety of tokens can be used by more DAPPs. , Compatible with the exchange. These include interfaces such as token name, token symbol, decimal point, total supply, balance, transfer, transfer from others, allowable value, events, etc.
+## 同质化代币
 
+同质化代币是可以相互替换且不具有唯一性的数字资产。GT 同时支持 ERC20 和同质化代币标准，因此开发者可以选择使用原生 TokenFactory 或通过智能合约标准创建代币。
 
-## ERC721 Token
+### TokenFactory
 
-Compared to inheriting some of the basic functional interfaces of the ERC 20 standard, he mainly added tokenid. ERC20 is a standard Token interface. The Token of ERC20 can be subdivided into 10^18 infinitely, while the smallest unit of Token of ERC721 is 1, which cannot be divided.
+TokenFactory 允许创建原生集成到基础链模块中的代币。这种集成意味着银行余额可以通过原生银行查询获得，而不像 ERC20 代币需要直接查询智能合约。
+
+- **原生集成**：通过 TokenFactory 创建的代币集成到链中，允许核心模块高效地与这些代币交互，RPC 客户端可以在原生银行和账户查询中返回它们的余额。
+- **高效查询**：代币可以通过原生查询获得，比直接查询智能合约更高效。
+- **推荐使用**：适用于性能和易访问性是优先考虑因素的场景或原生应用。
+
+### 智能合约代币
+
+- **ERC20**：ERC20 标准为基于 EVM 的区块链上的同质化代币定义了一套通用规则。这些代币可以使用标准函数进行转账、授权和查询。
+
+- **标准兼容性**：支持 ERC20 确保与现有 dApps 和生态系统的兼容性，同时支持 EVM 中心项目的接入。
+- **互操作性**：两种标准都支持指针合约，实现原生环境和 EVM 环境之间的无缝交互。
+
+### 互操作性和指针合约
+
+指针合约实现了 ERC20 代币之间的互操作性，允许两种标准之间的无缝交互。维护一个注册表来跟踪指针合约并促进互操作性。
+
+**推荐使用**：适用于需要标准代币交互以用于现有 dApps 和最大兼容性的应用。
+
+## 互操作性
+
+无论选择哪种方式，TokenFactory 和 ERC20 代币都可以部署指针合约，实现跨虚拟机的无缝互操作性。
+
+## NFTs
+
+非同质化代币（NFTs）代表独特的数字资产。GT 同时支持 ERC721 和 CW721 标准以及它们的版税（2981）对应版本。
+
+- **ERC721**：ERC721 标准定义了基于 EVM 的区块链上非同质化代币的结构。每个代币都是独特的，不能像同质化代币那样一对一交换。
+- **互操作性**：与同质化代币类似，NFTs 可以通过指针合约在不同标准之间交互。
+- **指针合约注册表**：用于跟踪 NFTs 特定指针合约的注册表。
 

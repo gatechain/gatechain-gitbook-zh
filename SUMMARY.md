@@ -13,33 +13,26 @@
   * [创建钱包](getting-started/wallet/create-wallet.md)
   * [账户](getting-started/wallet/accounts.md)
   * [质押](getting-started/wallet/staking.md)
-  * [治理](getting-started/wallet/governance.md)
 * [使用指南](getting-started/guides.md)
   * [跨链桥](getting-started/guides/bridge.md)
   * [创建代币](getting-started/guides/create-token.md)
-  * [发布到交易市场](getting-started/guides/listing.md)
-    * [创建交易对](getting-started/guides/create-swap-pair.md)
+  <!-- * [发布到交易市场](getting-started/guides/listing.md) -->
+    <!-- * [创建交易对](getting-started/guides/create-swap-pair.md) -->
   * [获取 GT](getting-started/guides/get-gt.md)
 
 ## 开发者
 * [简介](developers/introduction.md)
-  * [链](developers/introduction/chain.md)
+  * [区块链](developers/introduction/chain.md)
   * [资产标准](developers/introduction/asset-standards.md)
-  * [Gas](developers/introduction/gas.md)
+  * [Gas 费用](developers/introduction/gas.md)
   * [交易](developers/introduction/transactions.md)
   * [智能合约](developers/introduction/smart-contracts.md)
   * [虚拟机 (VM)](developers/introduction/vm/README.md)
     * [EVM](developers/introduction/vm/evm.md)
-    <!-- * [SVM](developers/introduction/vm/svm.md) -->
-  * [概念](developers/introduction/services.md)
-    * [Fee Proxy](developers/introduction/services/fee-proxy.md)
-    * [账户类型和结构](developers/introduction/services/accounts.md)
-    * [钱包](developers/introduction/services/wallet.md)
 * [快速开始](developers/quickstart.md)
   * [智能合约](developers/quickstart/smart-contracts.md)
   * [前端应用](developers/quickstart/frontend.md)
-  * [EVM](developers/quickstart/evm.md)
-  <!-- * [SVM](developers/quickstart/svm.md) -->
+
 
 ## 节点和验证者
 * [节点](nodes/README.md)
@@ -47,9 +40,9 @@
 * [验证者](nodes/validators/README.md)
   * [成为验证者](nodes/validators/become-validator.md)
 
-<!-- ## DA Service (Data Availability)
-* [DA Layer Introduction](da/README.md)
-* [How to Use DA](da/usage.md) -->
+<!-- ## DA 服务 (数据可用性)
+* [DA 层简介](da/README.md)
+* [如何使用 DA](da/usage.md) -->
 
 ## API 和 SDK
 * [API 参考](api/README.md)
@@ -64,5 +57,11 @@
 ## 工具和资源
 * [开发者工具](tools/README.md)
 * [常见问题](tools/faq.md)
+* [公共节点](tools/public-endpoints.md)
 * [水龙头](tools/faucet.md)
+  * [GT 水龙头](https://www.gate.io/zh/web3/faucet)
 * [热门 dApps](tools/dapps.md)
+  * [GateChain 浏览器](https://gatescan.org/)
+  * [GateWeb3 钱包](https://www.gate.io/zh/web3)
+  * [GT 挖矿](https://www.gate.io/zh/web3/mining/gt?tab=All)
+  * [Swap](https://www.gate.io/zh/web3/swap/eth-bnb?input_chain=1&input_token=ETH&output_chain=56&output_token=BNB)
