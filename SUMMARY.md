@@ -65,3 +65,6 @@
   * [GateWeb3 钱包](https://www.gate.io/zh/web3)
   * [GT 挖矿](https://www.gate.io/zh/web3/mining/gt?tab=All)
   * [Swap](https://www.gate.io/zh/web3/swap/eth-bnb?input_chain=1&input_token=ETH&output_chain=56&output_token=BNB)
+
+## 状态更新
+* [更新日志](status/README.md)
