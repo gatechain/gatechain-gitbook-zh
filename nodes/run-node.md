@@ -1,16 +1,16 @@
 # GateChain 全节点设置指南
 
 ## 概述
-GateChain 全节点是支持 GateChain 运行的核心组件。GateChain "全节点"具备 GateChain 的所有功能，包括构建本地 GateChain 测试网、加入 GateChain 公共测试网或加入 GateChain 主网。它还支持下载链上区块数据、验证和执行业务逻辑以及监控共识信息。
+GateChain 全节点是支持 GateChain 运行的核心组件。GateChain "全节点"具有 GateChain 的所有功能，包括构建本地 GateChain 测试网、加入 GateChain 公共测试网或加入 GateChain 主网。它还支持下载链上区块数据、验证和执行业务逻辑以及监控共识信息。
 
 ## 支持的平台
 GateChain 全节点目前支持 Unix 环境（macOS、Ubuntu、CentOS）。
 
 ## 硬件要求
-运行全节点的硬件必须满足以下要求：
+硬件必须满足以下要求才能运行全节点：
 
-- 操作系统：Mac OS 10.14.6 或更高版本、CentOS Linux release 7.7.1908 或更高版本，或 Ubuntu 18.04.2 或更高版本
-- 4 核 CPU、8GB+ 内存和 100GB+ 磁盘空间
+- 操作系统：Mac OS 10.14.6 或更高版本，CentOS Linux release 7.7.1908 或更高版本，或 Ubuntu 18.04.2 或更高版本
+- 4 核 CPU，8GB+ 内存，以及 100GB+ 磁盘空间
 - 稳定的网络连接，带宽至少 1MB/s
 
 ## 安装步骤
@@ -18,7 +18,7 @@ GateChain 全节点目前支持 Unix 环境（macOS、Ubuntu、CentOS）。
 ### 方法一：自动安装脚本
 注意：请确保您的环境中已安装 "wget"
 
-我们在 GitHub 上维护了一个安装脚本（"install.sh"），用于处理链可执行文件的设置。默认设置如下：
+我们在 GitHub 上维护了一个安装脚本（"install.sh"），用于处理链可执行文件的设置。该脚本使用以下默认设置：
 
 可执行文件放置在 "/usr/local/bin"（即 "gated" "gatecli"）
 
@@ -104,6 +104,97 @@ mkdir ~/.gated
 
 将配置文件复制到 "$GATEHOME/"
 
+### 方法四：Docker 安装
+Docker 提供了一种在容器中运行 GateChain 节点的便捷方式。官方 Docker 镜像可在 [GateChain Node Binary Repository](https://github.com/gatechain/node-binary) 获取。
+
+#### 前置要求
+- 系统已安装 Docker
+- 系统已安装 Docker Compose
+- 至少 100GB 可用磁盘空间
+
+#### 设置步骤
+
+1. 创建 Docker 卷目录：
+```bash
+mkdir -p ~/.gatechain_docker/{data,logs}
+```
+
+2. 创建 `docker-compose.yml` 文件，内容如下：
+```yaml
+version: '3'
+
+services:
+  gated:
+    image: gatechain:latest
+    container_name: gatechain-node
+    volumes:
+      - ~/.gatechain_docker/data:/root/.gated
+      - ~/.gatechain_docker/logs:/root/log
+    command: sh -c "mkdir -p /root/log && gated start > /root/log/node.log 2>&1"
+    restart: always
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+
+  evm-rest:
+    image: gatechain:latest
+    container_name: gatechain-evm-rest
+    volumes:
+      - ~/.gatechain_docker/data:/root/.gated
+      - ~/.gatechain_docker/data:/root/.gatecli
+      - ~/.gatechain_docker/logs:/root/log
+    depends_on:
+      - gated
+    command: sh -c "sleep 10 && gatecli evm rest-server --gm-websocket-port http://gatechain-node:8081 --chain-id gate-66 --laddr tcp://0.0.0.0:9545 --node http://gatechain-node:8080  --rpc-api web3,eth,personal,net,debug > /root/log/evm_rpc.log 2>&1"
+    restart: always
+    ports:
+      - "9545:9545"
+
+  rest-server:
+    image: gatechain:latest
+    container_name: gatechain-rest
+    volumes:
+      - ~/.gatechain_docker/data:/root/.gated
+      - ~/.gatechain_docker/data:/root/.gatecli
+      - ~/.gatechain_docker/logs:/root/log
+    depends_on:
+      - gated
+      - evm-rest
+    command: sh -c "gatecli rest-server --chain-id gate-66 --node http://gatechain-node:8080 --gm-websocket-port  http://gatechain-node:8081 --laddr tcp://0.0.0.0:1317 > /root/log/rest.log 2>&1"
+    restart: always
+    ports:
+      - "1317:1317"
+```
+
+3. 启动服务：
+```bash
+docker-compose up -d
+```
+
+4. 查看日志：
+```bash
+# 查看节点日志
+tail -f ~/.gatechain_docker/logs/node.log
+# 查看 EVM RPC 日志
+tail -f ~/.gatechain_docker/logs/evm_rpc.log
+# 查看 REST 服务器日志
+tail -f ~/.gatechain_docker/logs/rest.log
+```
+
+该设置包含三个服务：
+- `gated`：主要的 GateChain 节点
+- `evm-rest`：用于以太坊兼容性的 EVM RPC 服务
+- `rest-server`：GateChain 的 REST API 服务
+
+#### 开放端口
+- 8080：节点 P2P 通信
+- 8081：WebSocket 端口
+- 9545：EVM RPC 端点
+- 1317：REST API 端点
+
+#### 数据持久化
+所有数据都持久化存储在 `~/.gatechain_docker/data` 中，日志存储在 `~/.gatechain_docker/logs` 中。
+
 ## 启动节点
 
 ### 基本启动
@@ -112,7 +203,7 @@ gated start
 ```
 
 ### GC 模式启动
-要以 GC 模式启动，修改启动命令：
+要在 GC 模式下启动，修改启动命令：
 ```bash
 gated start --pruning nothing
 ```
@@ -122,7 +213,7 @@ gated start --pruning nothing
 gatecli evm rest-server --gm-websocket-port http://127.0.0.1:8085 --chain-id mainnet --laddr tcp://0.0.0.0:6060 --rpc-api web3,eth,personal,net,debug
 ```
 
-要支持 EVM RPC，请修改 config.json 中的以下属性：
+对于 EVM RPC 支持，修改 config.json 中的以下属性：
 ```json
 "WsPort": "tcp://0.0.0.0:8085"
 "IsWebSocketServerActive": true
@@ -130,4 +221,4 @@ gatecli evm rest-server --gm-websocket-port http://127.0.0.1:8085 --chain-id mai
 保存更改并重启 gated。
 
 ### 与节点交互
-您可以使用 [gatecli 命令行界面](../api/http.md) 或 [RPC API](../api/http.md) 与本地节点进行交互。
+您可以使用 [gatecli 命令行界面](../api/http.md) 或 [RPC API](../api/http.md) 与您的本地节点进行交互。
