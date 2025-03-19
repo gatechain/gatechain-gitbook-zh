@@ -27,8 +27,7 @@
   * [Gas 费用](developers/introduction/gas.md)
   * [交易](developers/introduction/transactions.md)
   * [智能合约](developers/introduction/smart-contracts.md)
-  * [虚拟机 (VM)](developers/introduction/vm/README.md)
-    * [EVM](developers/introduction/vm/evm.md)
+  * [EVM](developers/introduction/evm.md)
 * [快速开始](developers/quickstart.md)
   * [智能合约](developers/quickstart/smart-contracts.md)
   * [前端应用](developers/quickstart/frontend.md)
@@ -44,24 +43,23 @@
 * [DA 层简介](da/README.md)
 * [如何使用 DA](da/usage.md) -->
 
-## API 和 SDK
+## API
 * [API 参考](api/README.md)
   * [HTTP API](api/http.md)
   * [EVM API](api/evm.md)
 * [命令行工具](api/cli.md)
-* [SDK](api/sdk/README.md)
+<!-- * [SDK](api/sdk/README.md)
   * [JavaScript](api/sdk/javascript.md)
   * [Python](api/sdk/python.md)
-  * [Go](api/sdk/go.md)
+  * [Go](api/sdk/go.md) -->
 
 ## 工具和资源
 * [开发者工具](tools/README.md)
 * [常见问题](tools/faq.md)
 * [公共节点](tools/public-endpoints.md)
-* [水龙头](tools/faucet.md)
-  * [GT 水龙头](https://www.gate.io/zh/web3/faucet)
+* [GT 水龙头](https://www.gate.io/zh/web3/faucet)
+* [Gatescan](https://gatescan.org/)
 * [热门 dApps](tools/dapps.md)
-  * [GateChain 浏览器](https://gatescan.org/)
   * [GateWeb3 钱包](https://www.gate.io/zh/web3)
   * [GT 挖矿](https://www.gate.io/zh/web3/mining/gt?tab=All)
   * [Swap](https://www.gate.io/zh/web3/swap/eth-bnb?input_chain=1&input_token=ETH&output_chain=56&output_token=BNB)
