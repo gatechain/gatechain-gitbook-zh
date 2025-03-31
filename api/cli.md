@@ -1693,7 +1693,7 @@ Raw Log: sync broadcast tx success
 - 代币数量必须使用链上代币符号（例如AAA-94f）
 
 
-### 5. Burn Token
+### 5. 燃烧代币
 
 **命令**
 ```bash
