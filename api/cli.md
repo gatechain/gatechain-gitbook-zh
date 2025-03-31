@@ -860,7 +860,7 @@ Distribution Params:
 ```
 
 
-## Revocable Transaction Management
+## 可撤销交易管理
 
 ### 1.发送可撤销交易
 
