@@ -427,7 +427,7 @@ gatecli con-account online --from gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv
   Raw Log: sync broadcast tx success //transaction  is successfully sent
 ```
 
-### 3. Get Consensus Account Offline
+### 3. 获取离线共识账户
 
 **命令**
 ```bash
@@ -705,7 +705,7 @@ gatecli distribution withdraw-all-rewards --from gt11twm7dma44k7wg5jppeyphrct9nx
   Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
   Raw Log: sync broadcast tx success transaction is sent successfully
 ```
-### 4. Reinvestment the rewards of the delegator account into the consensus account
+### 4. 将委托账户的收益再投资到共识账户中
 
 **命令**
 ```bash
@@ -760,7 +760,7 @@ Delegator Total Rewards:
 	Con-account: gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7 // consensus account address
 	Reward: 21.644616251838158370NANOGT //commission and mining earnings
 ```
-### 6. Query Delegation Income of A Delegator Account At All Consensus Account
+### 6. 查询所有共识账户的委托收益
 
 **命令**
 ```bash
@@ -836,7 +836,7 @@ gatecli distribution commission gt11twm7dma44k7wg5jppeyphrct9nx2l4m8szy44h72qv9e
 660467079334.408199257068561630NANOGT //commission and mining earnings
 ```
 
-### 9. Query Distribution And Foundation 参数
+### 9. 查询分布和基础
 
 **命令**
 ```bash
@@ -862,7 +862,7 @@ Distribution Params:
 
 ## Revocable Transaction Management
 
-### 1. Send Revocable Transaction
+### 1.发送可撤销交易
 
 **命令**
 ```bash
@@ -894,7 +894,7 @@ Raw Log: sync broadcast tx success
 **说明**
 - 只有金库账户可以发送可撤销交易
 
-### 2. Query Single Transaction
+### 2. 查询单笔交易
 
 **命令**
 ```bash
@@ -933,7 +933,7 @@ Response:
       - recipient: gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7
 ```
 
-### 3. Query Revocable Transaction List
+### 3. 查询可撤销交易列表
 
 **命令**
 ```bash
@@ -1019,7 +1019,7 @@ TxHash: DELEGATE-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA6355
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
-### 2. Query Delegation Information of A Delegator Account In A Consensus Account
+### 2. 查询共识帐户中某个委托帐户的委托信息
 
 **命令**
 ```bash
@@ -1046,7 +1046,7 @@ Delegation:
   Con-account: gt11dsck7f7txdc7hz5wdsspey0w5eyhw7yj4xrc3a6r4w4t39z9k45r86htlzxjf6z57an2r7
   Shares: 100000000.000000000000000000
 ```
-### 3. Query Delegation Information of A Delegator Account In All Consensus Accounts 
+### 3. 查询委托人账户在所有共识账户中的委托信息
 
 **命令**
 ```bash
@@ -1206,7 +1206,7 @@ TxHash: UNDELEGATE-9F685A8362E6218E372CE60E306E8BC35B66006D82F9B3381A6AECE26FA63
 Data: rQO5zc/tCu8BYPD/ggoo3TuBsrqFDCGccbnTERbiO5v48wnG3ahDuFWSzrdVLzU0iuZQw2rzDBIoHk1VTbZ0J94UnjHi3aO8fwO1V5rK5I2NZvxNF1lFstSU9JD3J18JbxqUAWd0MXB1YjE4cTJmZ3VnZ3F5Znp0YzBwNXJhenEwZnRwdXplNzJwOXRwN25lZ2plZTl6amtjaGx2MHFwNThyZTdyZGduajNqd2x3d3JscjN6Z2o3cmNkcWxnc2Z3Y2V2YWRqaGE0ZXZoOThkejdzN3pjYzh5MHZhZnY3amh1ajNobXR1M2ZtajM2eXdqZWNtbnF1OWgSEgoMCgZOQU5PR1QSAjExEMCaDBowMXrG9msevrtuVTHWuZdFIixl5hSO4tWOvIZV01T/p+Pbg1sPeBgWGHbKUcm1064KImkKJeHhoPogZ32xdJvDkmTqENs7tchCbHrQ1z1n7Eeh1/ud9weWADUSQJRr9hYE0jvDKTx9IsfYAh3myFPQaYV9pt+TEi+IKdFm2KOZGYckVEbFx9ydMn2F6UbhopD5Y5HbrKJzf0fF9woyBNcEqQY=
 Raw Log: sync broadcast tx success
 ```
-### 9.Release of delegation through security account
+### 9.通过安全账户解除委托
 
 **命令**
 ```bash
