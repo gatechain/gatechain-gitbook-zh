@@ -7,6 +7,7 @@
 * [链架构](general/architecture.md)
 * [共识机制](general/consensus.md)
 * [治理](general/governance.md)
+  
 
 ## 入门指南
 * [钱包](getting-started/wallet/wallet.md)
@@ -28,7 +29,7 @@
   * [交易](developers/introduction/transactions.md)
   * [智能合约](developers/introduction/smart-contracts.md)
   * [EVM](developers/introduction/evm.md)
-* [快速开始](developers/quickstart.md)
+  * [系统合约](developers/introduction/contracts.md)
   * [智能合约](developers/quickstart/smart-contracts.md)
   * [前端应用](developers/quickstart/frontend.md)
 
