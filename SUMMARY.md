@@ -30,6 +30,7 @@
   * [智能合约](developers/introduction/smart-contracts.md)
   * [EVM](developers/introduction/evm.md)
   * [系统合约](developers/introduction/contracts.md)
+* [快速开始](developers/quickstart.md)
   * [智能合约](developers/quickstart/smart-contracts.md)
   * [前端应用](developers/quickstart/frontend.md)
 
