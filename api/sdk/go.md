@@ -5,7 +5,7 @@ Go SDK，支持与 GateChain 交互的大多数功能。
 ## 安装
 
 ```bash
-go get github.com/gatechain/gatechainsdk@v1.0.1-0.20250606063807-f88afa00dbd3
+go get github.com/gatechain/gatechainsdk@v1.0.1
 ```
 
 ## 更多文档
