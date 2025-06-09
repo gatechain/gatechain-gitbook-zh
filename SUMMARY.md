@@ -50,10 +50,10 @@
   * [HTTP API](api/http.md)
   * [EVM API](api/evm.md)
 * [命令行工具](api/cli.md)
-<!-- * [SDK](api/sdk/README.md)
-  * [JavaScript](api/sdk/javascript.md)
-  * [Python](api/sdk/python.md)
-  * [Go](api/sdk/go.md) -->
+* [SDK](api/sdk/README.md)
+  <!-- * [JavaScript](api/sdk/javascript.md) -->
+  <!-- * [Python](api/sdk/python.md) -->
+  * [Go](api/sdk/go.md) 
 
 ## 工具和资源
 * [开发者工具](tools/README.md)
